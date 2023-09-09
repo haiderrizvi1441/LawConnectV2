@@ -1,0 +1,17 @@
+server:
+    port: 8080
+
+spring: 
+    application: 
+        name: VENDOR-SERVICE
+    datasource: 
+        url: jdbc:mysql://${DB_HOST:localhost}:3306/vendordb
+        username: root
+        password: root123
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+    # Import Config
+    # config: 
+    #     import: configserver:http://localhost:9296
+    
+
