@@ -1,13 +1,15 @@
 package com.hr.vendorservice.service;
 
-import com.hr.vendorservice.entity.Vendor;
+
 import com.hr.vendorservice.model.VendorRequest;
+import com.hr.vendorservice.model.VendorResponse;
 
 public interface VendorService {
 
     long addVendor(VendorRequest vendorRequest);
 
-    void addNewVendor(Vendor vendor);
+    VendorResponse getVendorById(long id);
+
 
     
     

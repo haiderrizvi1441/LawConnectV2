@@ -1,10 +1,13 @@
 package com.hr.vendorservice.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hr.vendorservice.entity.Vendor;
+import com.hr.vendorservice.exception.VendorServiceCustomException;
 import com.hr.vendorservice.model.VendorRequest;
+import com.hr.vendorservice.model.VendorResponse;
 import com.hr.vendorservice.repository.VendorRepository;
 
 import lombok.extern.log4j.Log4j2;
@@ -39,12 +42,25 @@ public class VendorServiceImpl implements VendorService {
 
 
     @Override
-    public void addNewVendor(Vendor vendor) {
-        vendorRepository.save(vendor);
-        System.out.println("Vendor is being Created");
+    public VendorResponse getVendorById(long id) {
+        log.info("Searching For the Vendor Id: {}",id);
+        // Getting Vendor 
+        Vendor vendor = vendorRepository.findById(id).orElseThrow(() -> new VendorServiceCustomException("Vendor with Given Id Does not exist , please check again.", "VENDOR_NOT_FOUND"));
+
+        // Vendor -> VendorResponse
+        VendorResponse vendorResponse = new VendorResponse();
+
+        // Copying Properties using BeanUtils
+        BeanUtils.copyProperties(vendor, vendorResponse);
+
+        return vendorResponse;
     }
+
+
+
     
- 
+
+
     
 
 }
