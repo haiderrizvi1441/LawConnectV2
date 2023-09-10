@@ -1,11 +1,14 @@
 package com.hr.vendorservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,12 +39,26 @@ public class VendorController {
 
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<VendorResponse> getVendorById(@PathVariable long id){
         VendorResponse vendorResponse = vendorService.getVendorById(id);
         return new ResponseEntity<>(vendorResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/allVendors")
+    public ResponseEntity<List<VendorResponse>> getAllVendors(){
+        List<VendorResponse> vendors = vendorService.getAllVendors();
+
+        return new ResponseEntity<>(vendors, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vendor> updateVendorById(@PathVariable long id , @RequestBody VendorRequest vendorRequest){
+        Vendor updatedVendor = vendorService.updateVendorById(id,vendorRequest);
+
+        return new ResponseEntity<>(updatedVendor,HttpStatus.OK);
+    }
     
 
     

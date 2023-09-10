@@ -1,5 +1,9 @@
 package com.hr.vendorservice.service;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +43,9 @@ public class VendorServiceImpl implements VendorService {
         // Return the Vendor Id as per the controller requirement
         return vendor.getId();
     }
+    
 
-
+    // Getting Vendors By id
     @Override
     public VendorResponse getVendorById(long id) {
         log.info("Searching For the Vendor Id: {}",id);
@@ -56,7 +61,50 @@ public class VendorServiceImpl implements VendorService {
         return vendorResponse;
     }
 
+    // Getting all vendors 
+    @Override
+    public List<VendorResponse> getAllVendors() {
+        List<Vendor> vendors = vendorRepository.findAll();
+        log.info("Getting all Vendors");
+        // Converting from Vendor to VendorResponse
+        List<VendorResponse> vendorResponses = vendors.stream()
+                                                        .map(this::toVendorResponse)
+                                                        .collect(Collectors.toList());
+        log.info("All Vendors Retreived");                                             
+        return vendorResponses;
+    }
 
+    // Helper Function to convert Vendor -> VendorResponse
+    private VendorResponse toVendorResponse(Vendor vendor){
+        VendorResponse vendorResponse = VendorResponse.builder()
+                                        .firstname(vendor.getFirstname())
+                                        .lastname(vendor.getLastname())
+                                        .email(vendor.getEmail())
+                                        .password(vendor.getPassword())
+                                        .build();
+
+        return vendorResponse;
+    }
+
+    // Updating vendor by Id
+    @Override
+    public Vendor updateVendorById(long id, VendorRequest vendorRequest) {
+        log.info("Retrieving the Vendor by Id: {}", id);
+        Vendor vendor = vendorRepository.findById(id).get();
+        // Setting the stored entity properites using the vendorRequest Model Client has given
+        vendor.setFirstname(vendorRequest.getFirstname());
+        vendor.setLastname(vendorRequest.getLastname());
+        vendor.setEmail(vendorRequest.getEmail());
+        vendor.setPassword(vendorRequest.getPassword());
+
+        // Saving the update Entity back to Repo
+        vendorRepository.save(vendor);
+
+        return vendor;
+    }
+
+    
+    
 
     
 
