@@ -103,6 +103,17 @@ public class VendorServiceImpl implements VendorService {
         return vendor;
     }
 
+
+    @Override
+    public String deleteVendorById(long id) {
+        log.info("Retrieving the Vendor ID: {}",id);
+        vendorRepository.deleteById(id);
+        log.info("Vendor Deleted Successfully");
+        
+        return "Vendor Deleted Successfully";
+        
+    }
+
     
     
 

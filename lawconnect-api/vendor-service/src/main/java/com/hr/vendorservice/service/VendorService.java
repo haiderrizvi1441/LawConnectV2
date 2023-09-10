@@ -17,6 +17,8 @@ public interface VendorService {
 
     Vendor updateVendorById(long id, VendorRequest vendorRequest);
 
+    String deleteVendorById(long id);
+
 
 
 
