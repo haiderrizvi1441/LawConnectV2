@@ -5,13 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hr.userservice.entity.User;
 import com.hr.userservice.model.UserRequest;
 import com.hr.userservice.model.UserResponse;
 import com.hr.userservice.service.UserService;
@@ -50,6 +53,21 @@ public class UserController {
     public ResponseEntity<List<UserResponse>> getAllUsers(){
         List<UserResponse> usersResponses = userService.getAllUsers();
         return new ResponseEntity<>(usersResponses, HttpStatus.OK);
-    }   
+    }
+
+    // Deleting the user by Id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserbyId(@PathVariable long id){
+        userService.deleteUserbyId(id);
+        return new ResponseEntity<>("User Deleted Sucessfully", HttpStatus.OK);
+    }
+
+    //Updating the user by id
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUserById(@RequestBody UserRequest userRequest, @PathVariable long id){
+        User updatedUser = userService.updateUserbyId(userRequest, id);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
 
 }

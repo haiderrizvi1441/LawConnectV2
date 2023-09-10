@@ -78,4 +78,35 @@ public class UserServiceImpl implements UserService{
                                                 .build();
         return userResponse;
     }
+
+    @Override
+    public void deleteUserbyId(long id) {
+        log.info("Deleting user: {}",id);
+        userRepository.deleteById(id);
+
+        log.info("User Deleted Successfully");
+    }
+
+    @Override
+    public User updateUserbyId(UserRequest userRequest, long id) {
+        log.info("Retrieving User:{}",id);
+        User user = userRepository.findById(id).get();
+
+        // Modifying the properties of Entity from user Request
+        user.setFirstname(userRequest.getFirstname());
+        user.setLastname(userRequest.getLastname());
+        user.setEmail(userRequest.getEmail());
+        user.setPassword(userRequest.getPassword());
+
+        
+        log.info("User Found, updating User");
+        // Updating the entity in Repo
+        userRepository.save(user);
+        log.info("User Updated Successfully");
+        return user;
+    }
+
+
+
+
 }

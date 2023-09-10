@@ -10,5 +10,6 @@ public class UserServiceApplication {
 		SpringApplication.run(UserServiceApplication.class, args);
 		System.out.println("USER SERVICE IS WORKING FINE ");
 	}
+	
 
 }
