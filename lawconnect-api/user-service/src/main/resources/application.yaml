@@ -1,0 +1,22 @@
+
+server:
+    port: 8081
+
+spring: 
+    application: 
+        name: USER-SERVICE
+    datasource: 
+        url: jdbc:mysql://${DB_HOST:localhost}:3306/userdb
+        username: root
+        password: root123
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    jpa: 
+        hibernate: 
+            ddl-auto: update
+
+    # Import Config
+    # config: 
+    #     import: configserver:http://localhost:9296
+    
+
