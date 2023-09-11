@@ -77,6 +77,7 @@ public class VendorServiceImpl implements VendorService {
     // Helper Function to convert Vendor -> VendorResponse
     private VendorResponse toVendorResponse(Vendor vendor){
         VendorResponse vendorResponse = VendorResponse.builder()
+                                        .id(vendor.getId())
                                         .firstname(vendor.getFirstname())
                                         .lastname(vendor.getLastname())
                                         .email(vendor.getEmail())

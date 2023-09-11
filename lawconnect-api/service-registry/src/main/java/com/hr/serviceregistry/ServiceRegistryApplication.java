@@ -12,5 +12,5 @@ public class ServiceRegistryApplication {
 		SpringApplication.run(ServiceRegistryApplication.class, args);
 		System.out.println("SERVICE REGISTRY IS WORKING FOR LAW CONNECT");
 	}
-
+ 
 }

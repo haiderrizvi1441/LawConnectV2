@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService{
     // Helper Function to Convert User -> UserResponse (Entity->Model)
     public UserResponse toUserResponse(User user){
         UserResponse userResponse = UserResponse.builder()
+                                                .id(user.getId())
                                                 .firstname(user.getFirstname())
                                                 .lastname(user.getLastname())
                                                 .email(user.getEmail())
