@@ -16,29 +16,44 @@ spring:
           uri: http://localhost:8080 
           predicates:
             - Path=/vendor/**
-          # filters: # Config for Circuit Breaker
-          #   - name: CircuitBreaker 
-          #     args:
-          #       name: VENDOR-SERVICE
-          #       fallbackuri: forward:/vendorServiceFallBack
+          filters: # Config for Circuit Breaker
+            - name: CircuitBreaker 
+              args:
+                name: VENDOR-SERVICE
+                fallbackuri: forward:/vendorServiceFallBack
+                # Rate Limiter Config
+            - name: RequestRateLimiter 
+              args: 
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+
         - id: USER-SERVICE
           uri: http://localhost:8081
           predicates:
             - Path=/user/**
-          # filters: # Config for Circuit Breaker
-          #   - name: CircuitBreaker 
-          #     args:
-          #       name: USER-SERVICE
-          #       fallbackuri: forward:/userServiceFallBack
+          filters: # Config for Circuit Breaker
+            - name: CircuitBreaker 
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+            - name: RequestRateLimiter
+              args: 
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+
         - id: ADMIN-SERVICE
           uri: http://localhost:8082
           predicates:
             - Path=/admin/**
-          # filters: # Config for Circuit Breaker
-          #   - name: CircuitBreaker 
-          #     args:
-          #       name: ADMIN-SERVICE
-          #       fallbackuri: forward:/adminServiceFallBack
+          filters: # Config for Circuit Breaker
+            - name: CircuitBreaker 
+              args:
+                name: ADMIN-SERVICE
+                fallbackuri: forward:/adminServiceFallBack
+            - name: RequestRateLimiter
+              args: 
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
 
 
 
