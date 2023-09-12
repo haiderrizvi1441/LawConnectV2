@@ -13,7 +13,7 @@ spring:
     gateway:
       routes:
         - id: VENDOR-SERVICE
-          uri: http://localhost:8080
+          uri: http://localhost:8080 
           predicates:
             - Path=/vendor/**
           # filters: # Config for Circuit Breaker
@@ -40,3 +40,14 @@ spring:
           #       name: ADMIN-SERVICE
           #       fallbackuri: forward:/adminServiceFallBack
 
+
+
+# Zipkin Config
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    tracing: 
+        sampling: 
+            probability: 1.0
