@@ -37,9 +37,9 @@ spring:
                 name: USER-SERVICE
                 fallbackuri: forward:/userServiceFallBack
             - name: RequestRateLimiter
-              args: 
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
+              args:
+                redis-rate-limiter.replenishRate: 1 
+                redis-rate-limiter.burstCapacity: 1 
 
         - id: ADMIN-SERVICE
           uri: http://localhost:8082
@@ -75,5 +75,6 @@ okta:
     audience: api://default
     client-id: 0oab4phbjzZKmz9rl5d7
     client-secret: CYVlL38YWngew14V94x5XBOmMKtm61CBhby9P-qPGukFGmGFiWZKOEttXNTULfP8
-    redirect-uri:   
-    scopes: openid, profile, email, offline_access 
+#     redirect-uri:   
+#     scopes: openid, profile, email, offline_access
+
