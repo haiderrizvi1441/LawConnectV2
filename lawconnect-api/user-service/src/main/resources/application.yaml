@@ -18,6 +18,14 @@ spring:
     # CONFIG SERVER Properties
     config: 
         import: configserver:http://localhost:9296
+
+    # OKTA Config
+    security:
+        oauth2:
+            resourceserver: 
+                jwt:
+                    issuer-uri:  
+
     
 # # Eureka Config
 # eureka:
