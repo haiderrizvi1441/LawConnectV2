@@ -95,7 +95,7 @@ public class AdminServiceImpl implements AdminService {
 
         // Transferring Info of Model to Admin
 
-        // 1. Retrieve the Entity which needs to be updated.
+        // 1. Retrieve the Entity which needs to be updated.    
         Admin admin = adminRepository.findById(id).get();
         // 2. Updating the Values
         admin.setFirstname(adminRequest.getFirstname());
