@@ -1,14 +1,17 @@
 import './App.css';
-import TestPage from './Component/TestPage';
-import TestWebPage from './Component/TestWebPage';
+
+import Hero from './Component/Hero';
+import Navbar from './Component/Navbar';
+import Footer from './Component/Footer';
 
 
 function App() {
   return (
     <div className="App">
 
-      {/* <TestPage/> */}
-      <TestWebPage/>
+      <Navbar/>
+      <Hero/>
+      <Footer/>
     </div>
   );
 }
