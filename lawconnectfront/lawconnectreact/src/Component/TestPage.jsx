@@ -1,5 +1,5 @@
 import React from 'react'
-import Ferrari from "../Resources/ferrari-lopg.png"
+import Ferrari from "../Resources/Icons/ferrari-lopg.png"
 function TestPage() {
     return (
         <div className='main-ctn'>

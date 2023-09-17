@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePage = () => {
+const HomePageTest = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Navigation Bar */}
@@ -82,5 +82,5 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomePageTest;
 
