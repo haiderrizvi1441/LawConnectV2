@@ -75,6 +75,6 @@ okta:
     audience: api://default
     client-id: 0oab4phbjzZKmz9rl5d7
     client-secret: CYVlL38YWngew14V94x5XBOmMKtm61CBhby9P-qPGukFGmGFiWZKOEttXNTULfP8
-    redirect-uri: http://localhost:80/authorization-code/callback
+
     scopes: openid, profile, email, offline_access
 

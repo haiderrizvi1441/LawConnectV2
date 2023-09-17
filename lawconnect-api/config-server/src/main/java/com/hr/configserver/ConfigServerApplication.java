@@ -12,5 +12,5 @@ public class ConfigServerApplication {
 		SpringApplication.run(ConfigServerApplication.class, args);
 		System.out.println("CONFIG SERVER FOR LAW CONNECT IS RUNNING FINE");
 	}
-
+	
 }
