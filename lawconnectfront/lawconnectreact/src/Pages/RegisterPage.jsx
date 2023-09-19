@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom';
-
-function LoginPage() {
-
-  const navigate = useNavigate();
+import React, { useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom'
+const RegisterPage = () => {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     userType: 'user', // Default to 'User'
@@ -16,25 +15,42 @@ function LoginPage() {
       ...formData,
       [name]: value,
     });
-
-    
-
-
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
-    navigate('/Home');
   };
+
 
   return (
     <div className="bg-slate-900 text-white min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl mb-4 text-black font-bold">Login</h2>
+        <h2 className="text-2xl mb-4 text-black font-bold">Register</h2>
         <div className="mb-4 flex items-center justify-between bg-gray-300 border-slate-700 border-2"></div>
         <form onSubmit={handleSubmit}>
-          
+          <div className="mb-4">
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder="First Name"
+              className="w-full p-2 border rounded focus:outline-none focus:border-lime-400"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Last Name"
+              className="w-full p-2 border rounded focus:outline-none focus:border-lime-400"
+              required
+            />
+          </div>
           <div className="mb-4">
             <input
               type="email"
@@ -66,15 +82,15 @@ function LoginPage() {
         </form>
         <div className="text-center mt-4">
           <p className='text-black font-semibold'>
-            New to LawConnect ? {' '}
-            <a href="#" className="text-lime-400 hover:underline hover:text-lime-800">
-              <Link to="/register">Register</Link>
+            Already have an account?{' '}
+            <a href="#" className="text-lime-400 hover:underline">
+              <Link to="/login">Login</Link>
             </a>
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default RegisterPage;

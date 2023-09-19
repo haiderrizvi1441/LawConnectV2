@@ -1,17 +1,15 @@
 import './App.css';
 
-import Hero from './Component/Hero';
-import Navbar from './Component/Navbar';
-import Footer from './Component/Footer';
-
+import {BrowserRouter} from 'react-router-dom';
+import Pages from './Pages/Pages';
 
 function App() {
   return (
     <div className="App">
-
-      <Navbar/>
-      <Hero/>
-      <Footer/>
+  
+      <BrowserRouter>
+        <Pages/>
+      </BrowserRouter>
     </div>
   );
 }

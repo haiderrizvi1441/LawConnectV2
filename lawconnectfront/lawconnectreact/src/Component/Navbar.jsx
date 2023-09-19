@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link, useNavigate} from 'react-router-dom';
 function Navbar() {
   return (
     <div>
@@ -11,7 +11,7 @@ function Navbar() {
                     <li className='px-4'>About Us</li>
                     <li className='px-4'>Contact Us</li>
                 </ul>
-                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3'>Login/Sign Up</div>
+                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3'><Link to="/login">Login</Link></div>
             </nav>
 
     </div>
