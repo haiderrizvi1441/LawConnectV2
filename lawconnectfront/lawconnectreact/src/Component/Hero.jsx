@@ -24,7 +24,7 @@ function Hero() {
                     {/* Hero Text Material  */}
                     <div className='w-full h-auto flex flex-wrap flex-col items-center text-center p-10'>
                         <p className='text-yellow-300 font-bold text-2xl'>"Connecting Indian Legal System to Everyone!</p>
-                        <div className='text-lime-300 font-bold text-4xl'>______</div>
+                        <div className='text-lime-500 font-bold text-4xl'>______</div>
                     </div>
 
                     {/* SERVICE SECTION */}
@@ -56,22 +56,22 @@ function Hero() {
                         <div className='w-46 flex flex-col items-center mb-12 border-white border-2 p-2 rounded-xl'>
                             <img className='w-20 h-20' src={duedill} alt="Due Dilligence" />
                             <p className='text-2xl font-bold text-white'>Due Dilligence</p>
-                            <p className='text-sm font-bold text-lime-200'> Mergers and Aquisitions</p>
+                            <p className='text-sm font-bold text-lime-500'> Mergers and Aquisitions</p>
                         </div>
                         <div className='w-46 flex flex-col items-center mb-12 border-white border-2 p-2 rounded-xl'>
                             <img className='w-20 h-20' src={advocacy} alt="Case Advocacy" />
                             <p className='text-2xl font-bold text-white'>Case Advocacy</p>
-                            <p className='text-sm font-bold text-lime-200'> Helps Wins Cases</p>
+                            <p className='text-sm font-bold text-lime-500'> Helps Wins Cases</p>
                         </div>
                         <div className='w-46 flex flex-col items-center mb-12 border-white border-2 p-2 rounded-xl'>
                             <img className='w-20 h-20' src={drafting} alt="Drafting" />
                             <p className='text-2xl font-bold text-white'>Drafting</p>
-                            <p className='text-sm font-bold text-lime-200'> Drafting Support</p>
+                            <p className='text-sm font-bold text-lime-500'> Drafting Support</p>
                         </div>
                         <div className='w-46 flex flex-col items-center mb-12 border-white border-2 p-2 rounded-xl'>
                             <img className='w-20 h-20' src={advice} alt="Legal Advice" />
                             <p className='text-2xl font-bold text-white'>Legal Advice</p>
-                            <p className='text-sm font-bold text-lime-200'> Advisory Support</p>
+                            <p className='text-sm font-bold text-lime-500'> Advisory Support</p>
                         </div>
                     </div>
 
