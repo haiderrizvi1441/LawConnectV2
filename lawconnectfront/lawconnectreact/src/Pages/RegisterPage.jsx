@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 const RegisterPage = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,6 +22,7 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
+    navigate("/login");
   };
 
 
