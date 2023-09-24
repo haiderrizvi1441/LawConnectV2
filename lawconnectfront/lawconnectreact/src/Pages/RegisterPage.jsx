@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {Link, Navigate, useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 const RegisterPage = () => {
 
   const navigate = useNavigate();
@@ -8,11 +8,32 @@ const RegisterPage = () => {
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // For switch
+  const [registrationType, setRegistrationType] = useState('');
 
   const register = async(e) => {
     e.preventDefault();
+    let apiUrl = '';
+    switch(registrationType){
+      case 'admin':
+        apiUrl = 'http://localhost:8082/admin/addAdmin';
+        break;
+      
+      case 'vendor':
+        apiUrl = 'http://localhost:8080/vendor/addVendor';
+        break;
+
+      case 'user':
+        apiUrl = 'http://localhost:8081/user/addUser';
+        break;
+
+      default:
+        apiUrl = 'http://localhost:8081/user/addUser';
+        break;
+    }
     try{
-      await axios.post("http://localhost:8082/admin/addAdmin",{
+
+      await axios.post(apiUrl,{
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -86,6 +107,15 @@ const RegisterPage = () => {
               className="w-full p-2 border rounded focus:outline-none focus:border-lime-400"
               required
             />
+          </div>
+          <div className='radiobuttons text-bold text-black'>
+            <p>Register as </p>
+            <input className="m-2" type="radio" value="admin" checked={registrationType === "admin"} onChange={()=> {setRegistrationType('admin')}}/>
+            <label className="m-2">Admin</label>
+            <input className="m-2" type="radio" value="vendor" checked={registrationType === "vendor"} onChange={()=> {setRegistrationType('vendor')}} />
+            <label className="m-2">Vendor</label>
+            <input className="m-2" type="radio" value="user" checked={registrationType === "user"} onChange={()=> {setRegistrationType('user')}}/>
+            <label className="m-2">User</label>
           </div>
           
           <button
