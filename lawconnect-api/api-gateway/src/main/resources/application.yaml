@@ -6,7 +6,8 @@ spring:
     name: API-GATEWAY
   # Config Server
   config:
-    import: configserver:http://localhost:9296
+  # Modified for Docker Compatibility
+    import: configserver:http://${CONFIG_SERVER_URL:localhost}:9296
 
   # Cloud Config (Gateway specific)
   cloud:
