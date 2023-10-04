@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lcserviceregistry
+spec:
+  selector:
+    matchLabels:
+      app: lcserviceregistry
+  template:
+    metadata:
+      labels:
+        app: lcserviceregistry
+    spec:
+      containers:
+        - name: lcserviceregistry
+          image: lcserviceregistry:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
