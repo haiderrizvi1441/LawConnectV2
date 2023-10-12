@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: lcserviceregistry
-          image: lcserviceregistry:latest
+          image: haiderrizvi1441/lcserviceregistry:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
