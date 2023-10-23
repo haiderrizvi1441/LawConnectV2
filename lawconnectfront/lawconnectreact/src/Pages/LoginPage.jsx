@@ -32,21 +32,21 @@ function LoginPage() {
     <div className="bg-slate-900 text-white min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl mb-4 text-black font-bold">Login</h2>
-        <div className="mb-4 flex items-center justify-between bg-gray-300 border-slate-700 border-2"></div>
+        <div className="mb-4 flex items-center justify-between bg-gray-300 border-slate-700 border-2 "></div>
         <form onSubmit={handleSubmit}>
           
-          <div className="mb-4">
+          <div className="mb-4 text-black font-semibold">
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="w-full p-2 border rounded focus:outline-none focus:border-lime-400"
+              className="w-full p-2 border rounded focus:outline-none focus:border-lime-400 "
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 text-black font-semibold">
             <input
               type="password"
               name="password"

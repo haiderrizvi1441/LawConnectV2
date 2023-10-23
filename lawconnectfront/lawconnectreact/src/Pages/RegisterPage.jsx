@@ -55,7 +55,7 @@ const RegisterPage = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl mb-4 text-black font-bold">Register</h2>
         <div className="mb-4 flex items-center justify-between bg-gray-300 border-slate-700 border-2"></div>
-        <form onSubmit={register} className='text-indigo-600'>
+        <form onSubmit={register} className='text-black font-semibold'>
           <div className="mb-4 ">
             <input
               type="text"

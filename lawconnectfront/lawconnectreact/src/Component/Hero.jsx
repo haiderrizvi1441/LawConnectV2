@@ -1,6 +1,7 @@
 import React from 'react'
 import village from '../Resources/Images/lc-village.jpg'
 import village2 from '../Resources/Images/lc-village2.jpg'
+import village1 from '../Resources/Images/ref.png'
 import briefcase from '../Resources/Icons/briefcaseIcon.svg'
 import pen from '../Resources/Icons/penIcon.svg'
 import services from '../Resources/Icons/servicesIcon.svg'
@@ -9,13 +10,16 @@ import advocacy from '../Resources/Icons/caseAdvocacyIcon.svg'
 import drafting from '../Resources/Icons/draftingIcon.svg'
 import advice from '../Resources/Icons/legalAdviceIcon.svg'
 function Hero() {
-  return (
-    <div>
-        <div className='Hero w-full'>
+    return (
+        <div>
+            <div className='Hero w-full'>
                 {/* Image Section  */}
-                <div className='imagesection'>
-                    <img className='w-full' src={village} alt="village" />
-                    {/* <img src={village2} alt="village2" /> */}
+                <div className='relative w-full'>
+                    <img src={village} alt="village" className='w-full h-2/3 bg-contain ' />
+
+                    <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 text-white'>
+                        <h1 className='text-4xl font-semibold italic'>Providing Legal Services Across India </h1>
+                    </div>
                 </div>
 
                 {/*     QUOTE SECTION */}
@@ -80,9 +84,9 @@ function Hero() {
 
             </div>
 
-           
-    </div>
-  )
+
+        </div>
+    )
 }
 
 export default Hero
