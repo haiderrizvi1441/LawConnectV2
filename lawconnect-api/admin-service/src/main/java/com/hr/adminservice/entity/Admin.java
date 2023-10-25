@@ -1,5 +1,7 @@
 package com.hr.adminservice.entity;
 
+import org.checkerframework.checker.units.qual.C;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,5 +37,8 @@ public class Admin {
 
     @Column(name="password")
     private String password;
+
+    // @Column(name="role")
+    // private String role;
 
 }

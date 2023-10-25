@@ -9,6 +9,7 @@ import AddSkill from './AddSkill';
 import AdminMain from '../Admin/AdminMain';
 import VendorMain from '../Vendor/VendorMain';
 import UserMain from '../User/UserMain';
+import OktaLogin from './OktaLogin';
 
 
 function Pages() {
@@ -24,6 +25,7 @@ function Pages() {
         <Route path="/adminhome" element={<AdminMain/>} />
         <Route path="/vendorhome" element={<VendorMain/>} />
         <Route path="/userhome" element={<UserMain/>} />
+        <Route path="/oktalogin" element={<OktaLogin/>}/>
     </Routes>
   )
 }
