@@ -5,8 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Optional;
+import com.hr.userservice.entity.LoginRequest;
+import com.hr.userservice.entity.LoginResponse;
 import com.hr.userservice.entity.User;
 import com.hr.userservice.entity.UserRole;
 import com.hr.userservice.exception.UserServiceCustomException;
@@ -22,6 +26,10 @@ public class UserServiceImpl implements UserService{
 
     @Autowired // Dependency Injection
     private UserRepository userRepository;
+
+    
+    @Autowired // Injecting password Encoder
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public long addUser(UserRequest userRequest) {
@@ -83,6 +91,25 @@ public class UserServiceImpl implements UserService{
 
         
     }
+    // FOR LOGIN in Front End
+    @Override
+    public LoginResponse loginUser(LoginRequest loginRequest) {
+        String msg = "";
+        User user1 = userRepository.findByEmail(loginRequest.getEmail());
+        if(user1 != null){
+            String password = loginRequest.getPassword();
+            String encodedPassword = user1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+
+            if(isPwdRight){
+                Optional<User> user = userRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
+
+               
+
+            }
+        }
+    }
+
 
     @Override
     public List<UserResponse> getAllUsers() {
@@ -136,6 +163,8 @@ public class UserServiceImpl implements UserService{
         log.info("User Updated Successfully");
         return user;
     }
+
+    
     
 
 

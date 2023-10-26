@@ -2,6 +2,8 @@ package com.hr.userservice.service;
 
 import java.util.List;
 
+import com.hr.userservice.entity.LoginRequest;
+import com.hr.userservice.entity.LoginResponse;
 import com.hr.userservice.entity.User;
 import com.hr.userservice.model.UserRequest;
 import com.hr.userservice.model.UserResponse;
@@ -19,6 +21,8 @@ public interface UserService {
     User updateUserbyId(UserRequest userRequest, long id);
 
     UserResponse getUserByEmail(String email);
+
+    LoginResponse loginUser(LoginRequest loginRequest);
 
     
 

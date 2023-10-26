@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hr.userservice.entity.LoginRequest;
+import com.hr.userservice.entity.LoginResponse;
 import com.hr.userservice.entity.User;
 import com.hr.userservice.model.UserRequest;
 import com.hr.userservice.model.UserResponse;
@@ -61,6 +63,13 @@ public class UserController {
         UserResponse userResponse = userService.getUserByEmail(email);
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
 
+    }
+
+    // Main Login Functionality
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest){
+        LoginResponse loginResponse = userService.loginUser(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
     // Get All the users
