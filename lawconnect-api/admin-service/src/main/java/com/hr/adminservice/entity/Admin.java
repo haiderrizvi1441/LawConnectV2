@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name="admin")
+@Table(name="maintable")
 public class Admin {
     
     @Id
@@ -38,7 +38,7 @@ public class Admin {
     @Column(name="password")
     private String password;
 
-    // @Column(name="role")
-    // private String role;
+    @Column(name="role")
+    private UserRole role = UserRole.ADMIN;
 
 }

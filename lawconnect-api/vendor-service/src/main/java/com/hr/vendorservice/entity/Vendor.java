@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name="vendor")
+@Table(name="maintable")
 public class Vendor {
     
     @Id
@@ -35,6 +35,9 @@ public class Vendor {
 
     @Column(name="password")
     private String password;
+
+    @Column(name="role")
+    private UserRole role = UserRole.VENDOR;
 
     
 }

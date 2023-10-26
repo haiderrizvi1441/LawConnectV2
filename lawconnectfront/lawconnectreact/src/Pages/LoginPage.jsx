@@ -1,31 +1,37 @@
+import { eventWrapper } from '@testing-library/user-event/dist/utils';
+import axios from 'axios';
+import { Navbar } from 'flowbite-react';
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 
 function LoginPage() {
 
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    userType: 'user', // Default to 'User'
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    
+  const [email,setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
 
 
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here
-    navigate('/Home');
+    // To Navigate to respective HomePage as per roles (0:USER, 1:VENDOR, 2:ADMIN)
+    try{
+      const response = await axios.post(`http://localhost:8081/user/email/${email}`, {password});
+      if(response.status === 200){
+        navigate("/adminhome");
+      }
+      else{
+        alert("Invalid Email or Password , Please try again");
+      }
+    }
+    catch(error){
+      console.error("Error: ",error);
+      window.alert("An Error occured, Please try again", error);
+    }
+    // To find the user and check if creds are matching, also role.
+    
   };
 
   return (
@@ -39,8 +45,8 @@ function LoginPage() {
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               className="w-full p-2 border rounded focus:outline-none focus:border-lime-400 "
               required
@@ -50,8 +56,8 @@ function LoginPage() {
             <input
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="w-full p-2 border rounded focus:outline-none focus:border-lime-400"
               required
@@ -61,7 +67,7 @@ function LoginPage() {
           <button
             type="submit"
             className="w-full p-2 bg-lime-400 text-white font-semibold rounded hover:bg-opacity-90 focus:outline-none">
-            Register
+            Login
           </button>
         </form>
         <div className="text-center mt-4">

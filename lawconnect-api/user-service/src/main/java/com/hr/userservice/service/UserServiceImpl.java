@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hr.userservice.entity.User;
+import com.hr.userservice.entity.UserRole;
 import com.hr.userservice.exception.UserServiceCustomException;
 import com.hr.userservice.model.UserRequest;
 import com.hr.userservice.model.UserResponse;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService{
                         .lastname(userRequest.getLastname())
                         .email(userRequest.getEmail())
                         .password(userRequest.getPassword())
+                        .role(UserRole.USER)
                         .build();
         
         // Adding the Created Entity to Repo
@@ -55,6 +57,33 @@ public class UserServiceImpl implements UserService{
 
     }
 
+    // To get the user by Email for Front End Login and Loading HomePage as per the role
+    @Override
+    public UserResponse getUserByEmail(String email) {
+
+        log.info("Retrieving the user with email:{}", email);
+        User user = userRepository.findByEmail(email);
+        if (user==null){
+            throw new UserServiceCustomException("User with this email is not found", "USER_NOT_FOUND");
+        }
+        
+        // user -> userResponse (Entity -> Model)
+        UserResponse userResponse = UserResponse.builder()
+                                                .id(user.getId())
+                                                .firstname(user.getFirstname())
+                                                .lastname(user.getLastname())
+                                                .email(user.getEmail())
+                                                .password(user.getPassword())
+                                                .role(user.getRole())
+                                                .build();
+        
+
+        log.info("User Found");
+        return userResponse;
+
+        
+    }
+
     @Override
     public List<UserResponse> getAllUsers() {
         log.info("Retrieving all the users");
@@ -76,6 +105,7 @@ public class UserServiceImpl implements UserService{
                                                 .lastname(user.getLastname())
                                                 .email(user.getEmail())
                                                 .password(user.getPassword())
+                                                .role(user.getRole())
                                                 .build();
         return userResponse;
     }
@@ -106,6 +136,7 @@ public class UserServiceImpl implements UserService{
         log.info("User Updated Successfully");
         return user;
     }
+    
 
 
 

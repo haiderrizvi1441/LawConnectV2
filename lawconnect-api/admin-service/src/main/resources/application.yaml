@@ -6,7 +6,7 @@ spring:
     application: 
         name: ADMIN-SERVICE
     datasource: 
-        url: jdbc:mysql://${DB_HOST:localhost}:3306/admindb
+        url: jdbc:mysql://${DB_HOST:localhost}:3306/lcdb
         username: root
         password: root123
         driver-class-name: com.mysql.cj.jdbc.Driver

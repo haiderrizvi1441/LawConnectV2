@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hr.adminservice.entity.Admin;
+import com.hr.adminservice.entity.UserRole;
 import com.hr.adminservice.exception.AdminServiceCustomException;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
@@ -32,6 +33,7 @@ public class AdminServiceImpl implements AdminService {
                             .lastname(adminRequest.getLastname())
                             .email(adminRequest.getEmail())
                             .password(adminRequest.getPassword())
+                            .role(UserRole.ADMIN)
                             .build();
 
         adminRepository.save(admin);

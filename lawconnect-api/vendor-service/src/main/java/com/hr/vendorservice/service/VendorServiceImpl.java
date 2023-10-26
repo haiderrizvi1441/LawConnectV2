@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hr.vendorservice.entity.UserRole;
 import com.hr.vendorservice.entity.Vendor;
 import com.hr.vendorservice.exception.VendorServiceCustomException;
 import com.hr.vendorservice.model.VendorRequest;
@@ -33,6 +34,7 @@ public class VendorServiceImpl implements VendorService {
                         .lastname(vendorRequest.getLastname())
                         .email(vendorRequest.getEmail())
                         .password(vendorRequest.getPassword())
+                        .role(UserRole.VENDOR)
                         .build();
 
         // Saving the vendor in DataBase through JPARepo
