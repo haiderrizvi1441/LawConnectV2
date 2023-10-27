@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hr.vendorservice.entity.Vendor;
+import com.hr.vendorservice.model.LoginRequest;
+import com.hr.vendorservice.model.LoginResponse;
 import com.hr.vendorservice.model.VendorRequest;
 import com.hr.vendorservice.model.VendorResponse;
 import com.hr.vendorservice.service.VendorService;
 
 @RestController
-@CrossOrigin
+
 @RequestMapping("/vendor")
 public class VendorController {
 
@@ -43,11 +45,26 @@ public class VendorController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<VendorResponse> getVendorById(@PathVariable long id){
         VendorResponse vendorResponse = vendorService.getVendorById(id);
         return new ResponseEntity<>(vendorResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<VendorResponse> getvendorByEmail(@PathVariable String email){
+        VendorResponse vendorResponse = vendorService.getVendorByEmail(email);
+        return new ResponseEntity<>(vendorResponse, HttpStatus.OK);
+    }
+    
+    @PostMapping("/login")
+    // Main Front End Login Functionality
+    public ResponseEntity<LoginResponse> loginVendor(@RequestBody LoginRequest loginRequest){
+        LoginResponse loginResponse = vendorService.loginVendor(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/allVendors")
     public ResponseEntity<List<VendorResponse>> getAllVendors(){

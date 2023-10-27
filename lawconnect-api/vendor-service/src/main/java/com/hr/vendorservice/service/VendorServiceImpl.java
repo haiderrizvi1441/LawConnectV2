@@ -1,16 +1,22 @@
 package com.hr.vendorservice.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.crypto.interfaces.PBEKey;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hr.vendorservice.entity.UserRole;
 import com.hr.vendorservice.entity.Vendor;
 import com.hr.vendorservice.exception.VendorServiceCustomException;
+import com.hr.vendorservice.model.LoginRequest;
+import com.hr.vendorservice.model.LoginResponse;
 import com.hr.vendorservice.model.VendorRequest;
 import com.hr.vendorservice.model.VendorResponse;
 import com.hr.vendorservice.repository.VendorRepository;
@@ -23,7 +29,9 @@ public class VendorServiceImpl implements VendorService {
     // Injecting Repo
     @Autowired
     private VendorRepository vendorRepository;
-
+    // Injecting PasswordEncoder
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public long addVendor(VendorRequest vendorRequest) {
@@ -33,7 +41,7 @@ public class VendorServiceImpl implements VendorService {
                         .firstname(vendorRequest.getFirstname())
                         .lastname(vendorRequest.getLastname())
                         .email(vendorRequest.getEmail())
-                        .password(vendorRequest.getPassword())
+                        .password(this.passwordEncoder.encode(vendorRequest.getPassword()))
                         .role(UserRole.VENDOR)
                         .build();
 
@@ -47,7 +55,7 @@ public class VendorServiceImpl implements VendorService {
     }
     
 
-    // Getting Vendors By id
+    // Getting Vendor By id
     @Override
     public VendorResponse getVendorById(long id) {
         log.info("Searching For the Vendor Id: {}",id);
@@ -62,6 +70,61 @@ public class VendorServiceImpl implements VendorService {
 
         return vendorResponse;
     }
+
+    // Getting Vendor By Email
+    @Override
+    public VendorResponse getVendorByEmail(String email) {
+        log.info("Retrieving the Vendor with email:{}", email);
+        Vendor vendor = vendorRepository.findByEmail(email);
+        if(vendor == null){
+            throw new VendorServiceCustomException("Vendor with this email is not found", "VENDOR_NOT_FOUND");
+        }
+
+        // vendor --> vendorResponse (Entity -> Model)
+        VendorResponse vendorResponse = VendorResponse.builder()
+                                        .id(vendor.getId())
+                                        .firstname(vendor.getFirstname())
+                                        .lastname(vendor.getLastname())
+                                        .email(vendor.getEmail())
+                                        .password(vendor.getPassword())
+                                        .role(vendor.getRole())
+                                        .build();
+        log.info("Vendor is Found ");
+        
+        return vendorResponse;
+    }
+
+    @Override
+    public LoginResponse loginVendor(LoginRequest loginRequest) {
+        
+        Vendor vendor1 = vendorRepository.findByEmail(loginRequest.getEmail());
+
+        if(vendor1 != null){
+            String password = loginRequest.getPassword();
+            String encodedPassword = vendor1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+
+            if(isPwdRight){
+                Optional<Vendor> vendor = vendorRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
+
+                if(vendor.isPresent()){
+                    return new LoginResponse("Login Success", true, UserRole.VENDOR);
+                }
+                else{
+                    return new LoginResponse("Login Failed", false, UserRole.VENDOR);
+                }
+            }
+            else{
+                return new LoginResponse("Password does not match", false, UserRole.VENDOR);
+            }
+
+        }
+        else{
+            return new LoginResponse("Email does not exist", false, UserRole.VENDOR);
+        }
+        
+    }
+
 
     // Getting all vendors 
     @Override
@@ -117,12 +180,9 @@ public class VendorServiceImpl implements VendorService {
         
     }
 
-    
-    
 
     
 
-
-    
+ 
 
 }

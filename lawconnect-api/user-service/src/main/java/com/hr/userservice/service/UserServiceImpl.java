@@ -1,6 +1,7 @@
 package com.hr.userservice.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Optional;
 import com.hr.userservice.entity.LoginRequest;
 import com.hr.userservice.entity.LoginResponse;
 import com.hr.userservice.entity.User;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
                         .firstname(userRequest.getFirstname())
                         .lastname(userRequest.getLastname())
                         .email(userRequest.getEmail())
-                        .password(userRequest.getPassword())
+                        .password(this.passwordEncoder.encode(userRequest.getPassword()))
                         .role(UserRole.USER)
                         .build();
         
@@ -94,19 +94,29 @@ public class UserServiceImpl implements UserService{
     // FOR LOGIN in Front End
     @Override
     public LoginResponse loginUser(LoginRequest loginRequest) {
-        String msg = "";
+        
         User user1 = userRepository.findByEmail(loginRequest.getEmail());
         if(user1 != null){
             String password = loginRequest.getPassword();
             String encodedPassword = user1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
 
-            if(isPwdRight){
+            if(isPwdRight){ // is password right, check if
                 Optional<User> user = userRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
-               
-
+                if(user.isPresent()){
+                    return new LoginResponse("Login Success",true, UserRole.USER);
+                }
+                else{
+                    return new LoginResponse("Login Failed", false, UserRole.USER);
+                }
             }
+            else{
+                return new LoginResponse("Password does not match", false, UserRole.USER);
+            }
+        }
+        else{
+            return new LoginResponse("Email does not exist", false, UserRole.USER);
         }
     }
 

@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hr.adminservice.entity.Admin;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
+import com.hr.adminservice.model.LoginRequest;
+import com.hr.adminservice.model.LoginResponse;
 import com.hr.adminservice.service.AdminService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/admin")
 public class AdminController {
     
@@ -45,10 +46,24 @@ public class AdminController {
     }
 
     // To get Admin by Id
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<AdminResponse> getAdminById(@PathVariable long id){
         AdminResponse adminResponse = adminService.getAdminById(id);
         return new ResponseEntity<>(adminResponse, HttpStatus.OK);
+    }
+
+    // To get Admin by Email
+    @GetMapping("/email/{email}")
+    public ResponseEntity<AdminResponse> getAdminByEmail(@PathVariable String email){
+        AdminResponse adminResponse = adminService.getAdminbyEmail(email);
+        return new ResponseEntity<>(adminResponse, HttpStatus.OK);
+    }
+
+    // Main FrontEnd Login Functionality
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginAdmin(@RequestBody LoginRequest loginRequest){
+        LoginResponse loginResponse = adminService.loginAdmin(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
     // To get all the Admins

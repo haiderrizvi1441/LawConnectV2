@@ -5,6 +5,8 @@ import java.util.List;
 import com.hr.adminservice.entity.Admin;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
+import com.hr.adminservice.model.LoginRequest;
+import com.hr.adminservice.model.LoginResponse;
 
 public interface AdminService {
 
@@ -17,6 +19,10 @@ public interface AdminService {
     String deleteAdminById(long id);
 
     Admin updateAdminById(long id, AdminRequest adminRequest);
+
+    AdminResponse getAdminbyEmail(String email);
+
+    LoginResponse loginAdmin(LoginRequest loginRequest);
 
     
 }

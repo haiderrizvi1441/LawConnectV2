@@ -17,20 +17,31 @@ function LoginPage() {
     e.preventDefault();
     // Handle form submission here
     // To Navigate to respective HomePage as per roles (0:USER, 1:VENDOR, 2:ADMIN)
-    try{
-      const response = await axios.post(`http://localhost:8081/user/email/${email}`, {password});
-      if(response.status === 200){
-        navigate("/adminhome");
-      }
-      else{
-        alert("Invalid Email or Password , Please try again");
-      }
-    }
-    catch(error){
-      console.error("Error: ",error);
-      window.alert("An Error occured, Please try again", error);
-    }
     // To find the user and check if creds are matching, also role.
+    try{
+      await axios.post("http://localhost:8081/user/login",{
+        email: email,
+        password:password
+      }).then((result) => {
+        console.log(result.data);
+
+        if(result.data.message === "Email does not exist"){
+          alert("Email does not exist");
+        }
+        else if(result.data.message === "Login Success"){
+          navigate("/userhome");
+        }
+        else{
+          alert("Incorrect Email or Password , Please try again");
+        }
+
+      }, fail => {
+        console.error(fail)
+      }) 
+    }
+    catch(err){
+      alert(err.response.data);
+    }
     
   };
 

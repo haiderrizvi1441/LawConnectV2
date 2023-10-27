@@ -26,8 +26,9 @@ import com.hr.userservice.service.UserService;
 
 
 
-@CrossOrigin
 @RestController
+
+
 @RequestMapping("/user")
 public class UserController {
     

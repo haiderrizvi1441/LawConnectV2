@@ -1,10 +1,12 @@
 package com.hr.adminservice.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hr.adminservice.entity.Admin;
@@ -12,6 +14,8 @@ import com.hr.adminservice.entity.UserRole;
 import com.hr.adminservice.exception.AdminServiceCustomException;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
+import com.hr.adminservice.model.LoginRequest;
+import com.hr.adminservice.model.LoginResponse;
 import com.hr.adminservice.repository.AdminRepository;
 
 import lombok.extern.log4j.Log4j2;
@@ -21,9 +25,12 @@ import lombok.extern.log4j.Log4j2;
 public class AdminServiceImpl implements AdminService {
     
     // Injecting Repository
-
     @Autowired
     private AdminRepository adminRepository;
+
+    // Injecting PasswordEncoded
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public long addAdmin(AdminRequest adminRequest) {
@@ -32,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
                             .firstname(adminRequest.getFirstname())
                             .lastname(adminRequest.getLastname())
                             .email(adminRequest.getEmail())
-                            .password(adminRequest.getPassword())
+                            .password(this.passwordEncoder.encode(adminRequest.getPassword()))
                             .role(UserRole.ADMIN)
                             .build();
 
@@ -57,6 +64,60 @@ public class AdminServiceImpl implements AdminService {
 
         return adminResponse;
 
+    }
+
+    @Override
+    public AdminResponse getAdminbyEmail(String email) {
+        log.info("Retrieving the Admin By Email: {}", email);
+
+        Admin admin = adminRepository.findByEmail(email);
+
+        if(admin == null){
+            throw new AdminServiceCustomException("Admin with this email not found", "ADMIN_NOT_FOUND");
+        }
+        // Else convert Entity (Admin) --> Model(AdminResponse)
+        AdminResponse adminResponse = AdminResponse.builder()
+                                        .id(admin.getId())
+                                        .firstname(admin.getFirstname())
+                                        .lastname(admin.getLastname())
+                                        .email(admin.getEmail())
+                                        .password(admin.getPassword())
+                                        .role(admin.getRole())
+                                        .build();
+
+        log.info("Admin Found");
+        return adminResponse;
+    }
+
+    // Main Login functionality
+    @Override
+    public LoginResponse loginAdmin(LoginRequest loginRequest) {
+
+        Admin admin1 = adminRepository.findByEmail(loginRequest.getEmail());
+        
+        if(admin1 != null){
+            String password = loginRequest.getPassword();
+            String encodedPassword = admin1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+
+            if(isPwdRight){
+                Optional<Admin> admin = adminRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
+
+                if(admin.isPresent()){
+                    return new LoginResponse("Login Success", true, UserRole.ADMIN);
+                }
+                else{
+                    return new LoginResponse("Login Failed", false, UserRole.ADMIN);
+                }
+            }
+            else{
+                return new LoginResponse("Password does not match", false, UserRole.ADMIN);
+            }
+        }
+        else{
+            return new LoginResponse("Email does not exist", false, UserRole.ADMIN);
+        }
+        
     }
 
     @Override
@@ -109,6 +170,8 @@ public class AdminServiceImpl implements AdminService {
 
         return admin;
     }
+
+    
 
 
     

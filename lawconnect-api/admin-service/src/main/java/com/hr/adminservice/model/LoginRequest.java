@@ -1,4 +1,4 @@
-package com.hr.userservice.entity;
+package com.hr.adminservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class LoginResponse {
+
+public class LoginRequest {
     
-    String message;
-    Boolean status;
-    UserRole role;
+    private String email;
+    private String password;
 
 }

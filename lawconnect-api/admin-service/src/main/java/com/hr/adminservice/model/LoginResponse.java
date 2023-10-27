@@ -1,4 +1,6 @@
-package com.hr.userservice.entity;
+package com.hr.adminservice.model;
+
+import com.hr.adminservice.entity.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

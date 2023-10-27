@@ -1,6 +1,5 @@
 package com.hr.vendorservice.model;
 
-import com.hr.vendorservice.entity.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VendorResponse {
-
-    private long id;
-    private String firstname;
-    private String lastname;
+public class LoginRequest {
+    
     private String email;
     private String password;
-    private UserRole role;
-    
 }

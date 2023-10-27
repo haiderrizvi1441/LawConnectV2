@@ -1,5 +1,7 @@
 package com.hr.adminservice.model;
 
+import com.hr.adminservice.entity.UserRole;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +19,5 @@ public class AdminResponse {
     private String lastname;
     private String email;
     private String password;
+    private UserRole role;
 }
