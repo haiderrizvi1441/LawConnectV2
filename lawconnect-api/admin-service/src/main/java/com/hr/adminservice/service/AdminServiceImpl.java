@@ -96,11 +96,18 @@ public class AdminServiceImpl implements AdminService {
         return adminResponse;
     }
     // Grouping all User with Role
-    
+
     @Override
     public List<AdminResponse> getAllUsersByRole(UserRole role) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllUsersByRole'");
+
+        log.info("Retrieving all Users with role:{}", role);
+        List<Admin> roleuserstemp = adminRepository.findByRole(role);
+        
+        // Converting Entity to Model Using Helper Function
+        List<AdminResponse> roleusers = roleuserstemp.stream().map(this::toAdminResponse).collect(Collectors.toList());
+        
+        log.info("All Users Retrieved");
+        return roleusers;
     }
 
     // Main Login functionality
@@ -156,6 +163,7 @@ public class AdminServiceImpl implements AdminService {
                                                     .lastname(admin.getLastname())
                                                     .email(admin.getEmail())
                                                     .password(admin.getPassword())
+                                                    .role(admin.getRole())
                                                     .build();
  
         return adminResponse;
