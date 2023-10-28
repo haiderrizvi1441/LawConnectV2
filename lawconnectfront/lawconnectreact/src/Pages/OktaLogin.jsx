@@ -1,5 +1,5 @@
-import React from 'react'
-import {useOktaAuth} from "@okta/okta-react"
+import { useOktaAuth } from "@okta/okta-react";
+import React from 'react';
 
 function OktaLogin() {
 

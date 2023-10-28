@@ -1,15 +1,13 @@
-import { eventWrapper } from '@testing-library/user-event/dist/utils';
 import axios from 'axios';
-import { Navbar } from 'flowbite-react';
-import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginPage() {
 
   const navigate = useNavigate();
-  const [email,setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [myrole, setMyRole] = useState('');
 
 
 
@@ -18,31 +16,59 @@ function LoginPage() {
     // Handle form submission here
     // To Navigate to respective HomePage as per roles (0:USER, 1:VENDOR, 2:ADMIN)
     // To find the user and check if creds are matching, also role.
-    try{
-      await axios.post("http://localhost:8081/user/login",{
+    let apiurl = "";
+    switch(myrole){
+      case 'ADMIN':
+        apiurl = "http://localhost:8082/admin/login";
+        break;
+      
+      case 'VENDOR':
+        apiurl = "http://localhost:8080/vendor/login";
+        break;
+      
+      case 'USER':
+        apiurl = "http://localhost:8081/user/login";
+        break;
+      
+      default:
+        apiurl = "http://localhost:8081/user/login";
+        break;
+
+
+    }
+    try {
+      await axios.post(apiurl, {
         email: email,
-        password:password
+        password: password
       }).then((result) => {
         console.log(result.data);
 
-        if(result.data.message === "Email does not exist"){
+        if (result.data.message === "Email does not exist") {
           alert("Email does not exist");
         }
-        else if(result.data.message === "Login Success"){
-          navigate("/userhome");
+        else if (result.data.message === "Login Success") {
+          if (result.data.role === "ADMIN") {
+            navigate("/adminhome")
+          }
+          else if (result.data.role === "VENDOR") {
+            navigate("/vendorhome")
+          }
+          else {
+            navigate("/userhome")
+          }
         }
-        else{
+        else {
           alert("Incorrect Email or Password , Please try again");
         }
 
       }, fail => {
         console.error(fail)
-      }) 
+      })
     }
-    catch(err){
+    catch (err) {
       alert(err.response.data);
     }
-    
+
   };
 
   return (
@@ -51,7 +77,7 @@ function LoginPage() {
         <h2 className="text-2xl mb-4 text-black font-bold">Login</h2>
         <div className="mb-4 flex items-center justify-between bg-gray-300 border-slate-700 border-2 "></div>
         <form onSubmit={handleSubmit}>
-          
+
           <div className="mb-4 text-black font-semibold">
             <input
               type="email"
@@ -74,7 +100,19 @@ function LoginPage() {
               required
             />
           </div>
-          
+
+
+          <div className='radiobuttons text-bold text-black font-semibold bg-gray-400'>
+            <p className='underline'>Login as </p>
+            <input className="m-2" type="radio" value="ADMIN" checked={myrole === "ADMIN"} onChange={() => { setMyRole('ADMIN') }} />
+            <label className="m-2">Admin</label>
+            <input className="m-2" type="radio" value="VENDOR" checked={myrole === "VENDOR"} onChange={() => { setMyRole('VENDOR') }} />
+            <label className="m-2">Vendor</label>
+            <input className="m-2" type="radio" value="USER" checked={myrole === "USER"} onChange={() => { setMyRole('USER') }} />
+            <label className="m-2">User</label>
+          </div>
+
+
           <button
             type="submit"
             className="w-full p-2 bg-lime-400 text-white font-semibold rounded hover:bg-opacity-90 focus:outline-none">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 const RegisterPage = () => {
 
   const navigate = useNavigate();
@@ -108,8 +108,8 @@ const RegisterPage = () => {
               required
             />
           </div>
-          <div className='radiobuttons text-bold text-black'>
-            <p>Register as </p>
+          <div className='radiobuttons text-bold text-black font-semibold bg-gray-400'>
+            <p className='underline'>Register as </p>
             <input className="m-2" type="radio" value="admin" checked={registrationType === "admin"} onChange={()=> {setRegistrationType('admin')}}/>
             <label className="m-2">Admin</label>
             <input className="m-2" type="radio" value="vendor" checked={registrationType === "vendor"} onChange={()=> {setRegistrationType('vendor')}} />

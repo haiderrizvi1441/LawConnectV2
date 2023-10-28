@@ -1,10 +1,12 @@
 import React from 'react'
 import { Button, Navbar } from 'flowbite-react';
 import { FaHouseUser } from 'react-icons/fa'
+import {useNavigate} from 'react-router-dom';
 function UserMain() {
 
   // Customizing React icons 
   const style = { color: "white", fontSize: "45px" }
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -20,7 +22,7 @@ function UserMain() {
           <li className='px-4 hover:text-lime-500'>Contact Us</li>
         </ul>
       
-        <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3'>Add a button</button>
+        <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={() => {navigate("/")}}>Log Out</button>
       </nav>
 
 

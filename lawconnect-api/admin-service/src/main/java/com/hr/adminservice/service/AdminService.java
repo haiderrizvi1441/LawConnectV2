@@ -3,6 +3,7 @@ package com.hr.adminservice.service;
 import java.util.List;
 
 import com.hr.adminservice.entity.Admin;
+import com.hr.adminservice.entity.UserRole;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
 import com.hr.adminservice.model.LoginRequest;
@@ -23,6 +24,16 @@ public interface AdminService {
     AdminResponse getAdminbyEmail(String email);
 
     LoginResponse loginAdmin(LoginRequest loginRequest);
+
+    String deleteAll();
+
+    String deleteAllByRole(UserRole role);
+
+    List<AdminResponse> getAllUsersByRole(UserRole role);
+
+    
+
+    
 
     
 }

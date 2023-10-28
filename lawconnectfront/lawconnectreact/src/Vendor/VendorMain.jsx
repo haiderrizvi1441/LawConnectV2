@@ -27,7 +27,7 @@ function VendorMain() {
           <li className='px-4 hover:text-lime-500'>Contact Us</li>
         </ul>
       
-        <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3'>Add a button</button>
+        <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={()=>{navigate("/")}}>Log Out </button>
       </nav>
 
       

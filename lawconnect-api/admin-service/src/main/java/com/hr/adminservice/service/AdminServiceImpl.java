@@ -34,6 +34,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public long addAdmin(AdminRequest adminRequest) {
+
+        // To Check if user already exists or not 
+        log.info("Checking if user already exists");
+        Admin tempadmin = adminRepository.findByEmail(adminRequest.getEmail());
+        if(tempadmin == null){
+
+        }
         log.info("Adding the user....");
         Admin admin = Admin.builder()
                             .firstname(adminRequest.getFirstname())
@@ -88,22 +95,32 @@ public class AdminServiceImpl implements AdminService {
         log.info("Admin Found");
         return adminResponse;
     }
+    // Grouping all User with Role
+    
+    @Override
+    public List<AdminResponse> getAllUsersByRole(UserRole role) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllUsersByRole'");
+    }
 
     // Main Login functionality
     @Override
     public LoginResponse loginAdmin(LoginRequest loginRequest) {
 
         Admin admin1 = adminRepository.findByEmail(loginRequest.getEmail());
+    
         
         if(admin1 != null){
             String password = loginRequest.getPassword();
             String encodedPassword = admin1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            Boolean roleMatch = (admin1.getRole() == UserRole.ADMIN);
+    
 
             if(isPwdRight){
                 Optional<Admin> admin = adminRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
-                if(admin.isPresent()){
+                if(admin.isPresent() && roleMatch){
                     return new LoginResponse("Login Success", true, UserRole.ADMIN);
                 }
                 else{
@@ -149,6 +166,23 @@ public class AdminServiceImpl implements AdminService {
         log.info("Deleting Admin id:{}",id);
         adminRepository.deleteById(id);
         return "Admin Deleted Successfully";
+    }
+
+    @Override
+    public String deleteAllByRole(UserRole role) {
+        log.info("Deleting all with role:{}", role);
+        adminRepository.deleteByRole(role);
+        log.info("All Deleted");
+        return "All Respective Role Deleted";
+    }
+
+
+    @Override
+    public String deleteAll() {
+        log.info("Deleting all Users");
+        adminRepository.deleteAll();
+        log.info("All Users deleted");
+        return "All Users are deleted";
     }
 
     @Override

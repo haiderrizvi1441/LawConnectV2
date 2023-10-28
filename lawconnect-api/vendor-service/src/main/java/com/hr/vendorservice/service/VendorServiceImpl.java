@@ -2,10 +2,7 @@ package com.hr.vendorservice.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import javax.crypto.interfaces.PBEKey;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,11 +100,12 @@ public class VendorServiceImpl implements VendorService {
             String password = loginRequest.getPassword();
             String encodedPassword = vendor1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            Boolean roleMatch = (vendor1.getRole() == UserRole.VENDOR);
 
             if(isPwdRight){
                 Optional<Vendor> vendor = vendorRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
-                if(vendor.isPresent()){
+                if(vendor.isPresent() && roleMatch){
                     return new LoginResponse("Login Success", true, UserRole.VENDOR);
                 }
                 else{

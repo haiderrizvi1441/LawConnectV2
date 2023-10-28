@@ -100,11 +100,12 @@ public class UserServiceImpl implements UserService{
             String password = loginRequest.getPassword();
             String encodedPassword = user1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            Boolean roleMatch = (user1.getRole() == UserRole.USER);
 
             if(isPwdRight){ // is password right, check if
                 Optional<User> user = userRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
-                if(user.isPresent()){
+                if(user.isPresent() && roleMatch){
                     return new LoginResponse("Login Success",true, UserRole.USER);
                 }
                 else{

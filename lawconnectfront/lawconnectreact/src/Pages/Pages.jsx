@@ -1,15 +1,14 @@
-import Navbar from '../Component/Navbar';
 import React from "react";
-import {Route, Routes} from 'react-router-dom';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
-import HomePage from './HomePage';
-import MainHome from './MainHome';
-import AddSkill from './AddSkill';
+import { Route, Routes } from 'react-router-dom';
 import AdminMain from '../Admin/AdminMain';
-import VendorMain from '../Vendor/VendorMain';
 import UserMain from '../User/UserMain';
+import VendorMain from '../Vendor/VendorMain';
+import AddSkill from './AddSkill';
+import HomePage from './HomePage';
+import LoginPage from './LoginPage';
+import MainHome from './MainHome';
 import OktaLogin from './OktaLogin';
+import RegisterPage from './RegisterPage';
 
 
 function Pages() {

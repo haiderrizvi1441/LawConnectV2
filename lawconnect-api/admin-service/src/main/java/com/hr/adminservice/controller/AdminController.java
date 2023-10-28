@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hr.adminservice.entity.Admin;
+import com.hr.adminservice.entity.UserRole;
 import com.hr.adminservice.model.AdminRequest;
 import com.hr.adminservice.model.AdminResponse;
 import com.hr.adminservice.model.LoginRequest;
@@ -66,6 +68,13 @@ public class AdminController {
         return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
+    // Getting Users By Roles
+    @GetMapping("/getallbyrole/{role}")
+    public ResponseEntity<List<AdminResponse>> getAllUsersByRole(@PathVariable UserRole role){
+        List<AdminResponse> roleUsers = adminService.getAllUsersByRole(role);
+        return new ResponseEntity<>(roleUsers, HttpStatus.OK);
+    }
+
     // To get all the Admins
     @GetMapping("/allAdmins")
     public ResponseEntity<List<AdminResponse>> getAllAdmins(){
@@ -81,6 +90,24 @@ public class AdminController {
 
         return new ResponseEntity<>(deleted,HttpStatus.OK);
     }
+
+    // To Delete All By Role (Admin,User, Vendor)
+    @DeleteMapping("deleteAll/{role}")
+    @Transactional
+    public ResponseEntity<String> deleteAllAdmins(@PathVariable UserRole role){
+        String allAdminsDeleted = adminService.deleteAllByRole(role);
+
+        return new ResponseEntity<>(allAdminsDeleted, HttpStatus.OK);
+    }
+
+    // To Delete All Present in Database
+    @DeleteMapping("deleteAll")    
+    public ResponseEntity<String> deleteAll(){
+        String alldeleted = adminService.deleteAll();
+        
+        return new ResponseEntity<>(alldeleted, HttpStatus.OK);
+    }
+
 
     // Updating an user by Id
     @PutMapping("/{id}")
