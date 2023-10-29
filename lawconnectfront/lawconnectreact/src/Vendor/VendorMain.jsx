@@ -2,7 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Navbar } from 'flowbite-react';
 import { FaHouseUser } from 'react-icons/fa'
-
+import TabsVendor from './TabsVendor'
+import TestTabs from './TestTabs';
 function VendorMain() {
 
   const navigate = useNavigate();
@@ -29,8 +30,8 @@ function VendorMain() {
       
         <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={()=>{navigate("/")}}>Log Out </button>
       </nav>
-
-      
+      <TestTabs/>
+      {/* hero section  */}
       <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
           <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Hello Lawyer</h1>
