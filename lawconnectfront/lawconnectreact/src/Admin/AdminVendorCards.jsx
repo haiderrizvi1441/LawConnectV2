@@ -8,6 +8,10 @@ import axios from 'axios';
 function AdminVendorCards() {
 
     const navigate = useNavigate();
+    const [vendors, setVendors] = useState([]);
+
+
+    
 
     // Function to Create Indivisual Cards
     const VendorCard = ({ vendor }) => {
@@ -28,19 +32,29 @@ function AdminVendorCards() {
                     <span class="text-sm text-gray-500 dark:text-gray-400">Lawyer</span>
                     <div class="flex mt-4 space-x-3 md:mt-6">
                         <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View Profile</button>
-                        <button href="#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Delete</button>
+                        <button onClick={() => DeleteResponse(vendor.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Delete</button>
                     </div>
                 </div>
             </div>
-
         )
+    }
 
+    // Function to Delete Card
+    const DeleteResponse = async(id) => {
+        try{
+            await axios.delete(`http://localhost:8080/vendor/${id}`);
+            console.log("Vendor Deleted with Id: ",id);
+            setVendors(vendors.filter(vendor => vendor.id !== id));
+            
 
-
+        }
+        catch(error){
+            console.error(error);
+        }
     }
 
 
-    const [vendors, setVendors] = useState([]);
+    
 
 
     useEffect(() => {

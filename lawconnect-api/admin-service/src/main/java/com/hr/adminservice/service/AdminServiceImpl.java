@@ -117,7 +117,7 @@ public class AdminServiceImpl implements AdminService {
         Admin admin1 = adminRepository.findByEmail(loginRequest.getEmail());
     
         
-        if(admin1 != null){
+        if(admin1 != null && ((admin1.getRole())==UserRole.ADMIN)){
             String password = loginRequest.getPassword();
             String encodedPassword = admin1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
