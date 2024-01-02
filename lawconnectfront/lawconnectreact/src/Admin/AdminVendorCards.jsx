@@ -20,7 +20,7 @@ function AdminVendorCards() {
         return (
             
 
-            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-4">
                 <div class="flex justify-end px-4 pt-4">
 
                 </div>
@@ -75,7 +75,7 @@ function AdminVendorCards() {
     // Mapping the List of Vendors to the Card Function
     return (
 
-        <div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4'>
             {vendors.map((vendor) => (
                 <VendorCard key={vendor.id} vendor={vendor}/>
 
