@@ -38,7 +38,7 @@ public class AdminController {
         return "Admin Service API is working fine";
     }
 
-    // To add the Admin 
+    // To add the Admin //
     @PostMapping("/addAdmin")
     public ResponseEntity<Long> addAdmin(@RequestBody AdminRequest adminRequest){
         long adminId = adminService.addAdmin(adminRequest);

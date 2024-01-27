@@ -27,11 +27,11 @@ function LoginPage() {
         break;
       
       case 'USER':
-        apiurl = "http://localhost:8081/user/login";
+        apiurl = "http://localhost:8081/customer/login";
         break;
       
       default:
-        apiurl = "http://localhost:8081/user/login";
+        apiurl = "http://localhost:8081/customer/login";
         break;
 
 
@@ -109,7 +109,7 @@ function LoginPage() {
             <input className="m-2" type="radio" value="VENDOR" checked={myrole === "VENDOR"} onChange={() => { setMyRole('VENDOR') }} />
             <label className="m-2">Vendor</label>
             <input className="m-2" type="radio" value="USER" checked={myrole === "USER"} onChange={() => { setMyRole('USER') }} />
-            <label className="m-2">User</label>
+            <label className="m-2">Customer</label>
           </div>
 
 

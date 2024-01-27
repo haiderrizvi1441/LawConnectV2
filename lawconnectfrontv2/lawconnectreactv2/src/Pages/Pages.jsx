@@ -11,6 +11,7 @@ import OktaLogin from './OktaLogin';
 import RegisterPage from './RegisterPage';
 import VendorProfile from "../Vendor/VendorProfile";
 import UserProfile from "../User/UserProfile";
+import SkillForm from "../Vendor/SkillForm";
 
 
 function Pages() {
@@ -29,6 +30,7 @@ function Pages() {
         <Route path="/oktalogin" element={<OktaLogin/>}/>
         <Route path="/vendorprofile" element={<VendorProfile/>} />
         <Route path="/userprofile" element={<UserProfile/>} />
+        <Route path= "/skillform" element={<SkillForm/>} />
     </Routes>
   )
 }

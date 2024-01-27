@@ -1,0 +1,51 @@
+
+server:
+    port: 8081
+
+spring: 
+    application: 
+        name: USER-SERVICE
+    datasource: 
+        url: jdbc:mysql://${DB_HOST:localhost}:3306/lcdbv2
+        username: root
+        password: root123
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    jpa: 
+        hibernate: 
+            ddl-auto: update
+
+    # CONFIG SERVER Properties
+    config: 
+        import: configserver:http://localhost:9296
+
+    # OKTA Config
+    # security:
+    #     oauth2:
+    #         resourceserver: 
+    #             jwt:
+    #                 issuer-uri: https://dev-90693819.okta.com/oauth2/default
+    #         client: 
+    #             registration: 
+    #                 internal-client: 
+    #                     provider: okta
+    #                     authorization-grant-type: client_credentials
+    #                     scope: internal
+    #                     client-id: 0oab4phbjzZKmz9rl5d7
+    #                     client-secret: CYVlL38YWngew14V94x5XBOmMKtm61CBhby9P-qPGukFGmGFiWZKOEttXNTULfP8
+    #             provider:
+    #                 okta: 
+    #                     issuer-uri: https://dev-90693819.okta.com/oauth2/default
+
+    
+# # Eureka Config
+# eureka:
+#     instance: 
+#         prefer-ip-address: true
+#     client: 
+#         fetch-registry: true
+#         register-with-eureka: true
+#         service-url:
+#             defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
+
+# This is redundant due to Config Server 

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name="maintable")
+@Table(name="users")
 public class Vendor {
     
     @Id
@@ -30,7 +30,7 @@ public class Vendor {
     @Column(name="last_name")
     private String lastname;
 
-    @Column(name="email")
+    @Column(name="email", unique = true)
     private String email;
 
     @Column(name="password")

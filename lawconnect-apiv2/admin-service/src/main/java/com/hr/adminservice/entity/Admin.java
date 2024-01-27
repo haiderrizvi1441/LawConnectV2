@@ -1,6 +1,6 @@
 package com.hr.adminservice.entity;
 
-import org.checkerframework.checker.units.qual.C;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name="maintable")
+@Table(name="users")
 public class Admin {
     
     @Id
@@ -32,7 +32,7 @@ public class Admin {
     @Column(name="last_name")
     private String lastname;
 
-    @Column(name="email")
+    @Column(name="email", unique = true)
     private String email;
 
     @Column(name="password")

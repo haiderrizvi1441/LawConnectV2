@@ -13,13 +13,14 @@ function UserProfile(props) {
         <nav className='w-full h-20 bg-slate-800 text-white flex justify-between px-4 py-2 items-center'>
         <div className='flex items-center'>
           <div className='m-4'><IoIosBriefcase style={style} /></div>
-          <div  className='text-2xl hover:text-blue-500'> Profile Information</div>
+          <div  className='text-2xl'> Profile Information</div>
         </div>
         <ul className='flex font-semibold'>
           <li className='px-4 hover:text-lime-500'>About Us</li>
           <li className='px-4 hover:text-lime-500'>Contact Us</li>
+          <li on onClick={()=>{navigate("/adminhome")}} className='px-4 hover:text-lime-500'> >> Back To Home</li>
         </ul>
-      
+        
         <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={() => {navigate("/")}}>Log Out</button>
       </nav>
     

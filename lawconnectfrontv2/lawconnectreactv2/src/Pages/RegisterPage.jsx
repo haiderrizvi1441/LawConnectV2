@@ -24,11 +24,11 @@ const RegisterPage = () => {
         break;
 
       case 'user':
-        apiUrl = 'http://localhost:8081/user/addUser';
+        apiUrl = 'http://localhost:8081/customer/addCustomer';
         break;
 
       default:
-        apiUrl = 'http://localhost:8081/user/addUser';
+        apiUrl = 'http://localhost:8081/customer/addCustomer';
         break;
     }
     try{
@@ -115,7 +115,7 @@ const RegisterPage = () => {
             <input className="m-2" type="radio" value="vendor" checked={registrationType === "vendor"} onChange={()=> {setRegistrationType('vendor')}} />
             <label className="m-2">Vendor</label>
             <input className="m-2" type="radio" value="user" checked={registrationType === "user"} onChange={()=> {setRegistrationType('user')}}/>
-            <label className="m-2">User</label>
+            <label className="m-2">Customer</label>
           </div>
           
           <button

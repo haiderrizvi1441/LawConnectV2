@@ -1,11 +1,11 @@
-server:
+ksserver:
     port: 8080
 
 spring: 
     application: 
         name: VENDOR-SERVICE
     datasource: 
-        url: jdbc:mysql://${DB_HOST:localhost}:3306/lcdb
+        url: jdbc:mysql://${DB_HOST:localhost}:3306/lcdbv2
         username: root
         password: root123
         driver-class-name: com.mysql.cj.jdbc.Driver
