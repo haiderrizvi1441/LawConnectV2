@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="skills")
+@Table(name="Skill_Master")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,8 @@ public class Skill {
 
     @Column(name="skill_name")
     private String skillName;
+
+    
 
     
 

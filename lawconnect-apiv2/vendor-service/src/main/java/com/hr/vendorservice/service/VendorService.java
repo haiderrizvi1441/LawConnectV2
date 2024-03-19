@@ -25,6 +25,8 @@ public interface VendorService {
 
     LoginResponse loginVendor(LoginRequest loginRequest);
 
+    Vendor addSkillToVendor(long vendorId, String skill);
+
 
 
 

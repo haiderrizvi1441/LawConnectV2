@@ -8,11 +8,40 @@ function SkillForm() {
     const [selectedSkill, setSelectedSkill] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // if(!selectedSkill){
+        //     setMessage("Please select a skill.");
+        //     return;
+        // }
+        try{
+            const response = await fetch(`http://localhost:8080/vendor/5/addskill`, {
+                method: 'POST',
+                body: JSON.stringify(selectedSkill),
+                headers: {'Content-Type': 'application/json'},
+            });
 
+            if(response.ok){
+                const updatedVendor = await response.json();
+                setMessage("The Skill is added successfully");
+                selectedSkill(''); // Clear the Selected Skill
+            }
+            // Else set the message as backend error 
+            else{
+                const error = await response.text();
+                setMessage(error);
+            }
+        }
+        catch(error){
+            console.error(error);
+            setMessage("An Error Occured , Please try again");
+        }
+
+        // Add the skill to Vendor profile
+        // if skill already added "message- already added" , else add and show sucess message 
+        
         // Display the success message
-        setMessage("The Skill is added sucessfully.");
+        // setMessage("The Skill is added sucessfully.");
     }
 
 
@@ -22,7 +51,7 @@ function SkillForm() {
             <nav className='w-full h-20 bg-slate-800 text-white flex justify-between px-4 py-2 items-center'>
                 <div className='text-2xl hover:text-blue-500'>Adding your skills here ....</div>
 
-                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={(e) => navigate("/skillform")}>Add </div>
+                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={(e) => navigate("/")}>Back to Profile</div>
             </nav>
             {/* Banner  */}
 

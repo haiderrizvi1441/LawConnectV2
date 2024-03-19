@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-@Table(name="users")
+@Table(name="Admin_Master")
 public class Admin {
     
     @Id

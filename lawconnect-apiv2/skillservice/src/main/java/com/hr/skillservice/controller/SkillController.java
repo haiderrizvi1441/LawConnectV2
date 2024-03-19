@@ -13,4 +13,7 @@ public class SkillController {
         return "Skill Service is Working fine";
     }
 
+    @GetMapping("/skill_id")
+    public 
+
 }

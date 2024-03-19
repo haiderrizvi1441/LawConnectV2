@@ -1,5 +1,8 @@
 package com.hr.vendorservice.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.hr.vendorservice.entity.UserRole;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +22,6 @@ public class VendorResponse {
     private String email;
     private String password;
     private UserRole role;
+    private List<String> skills = new ArrayList<>();
     
 }

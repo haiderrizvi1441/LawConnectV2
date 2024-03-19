@@ -1,5 +1,6 @@
 package com.hr.vendorservice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import com.hr.vendorservice.model.VendorRequest;
 import com.hr.vendorservice.model.VendorResponse;
 import com.hr.vendorservice.repository.VendorRepository;
 
+import jakarta.ws.rs.BadRequestException;
 import lombok.extern.log4j.Log4j2;
 
 @Service
@@ -40,6 +42,8 @@ public class VendorServiceImpl implements VendorService {
                         .email(vendorRequest.getEmail())
                         .password(this.passwordEncoder.encode(vendorRequest.getPassword()))
                         .role(UserRole.VENDOR)
+                        .skills(new ArrayList<>())
+                        
                         .build();
 
         // Saving the vendor in DataBase through JPARepo
@@ -85,6 +89,7 @@ public class VendorServiceImpl implements VendorService {
                                         .email(vendor.getEmail())
                                         .password(vendor.getPassword())
                                         .role(vendor.getRole())
+                                        .skills(vendor.getSkills())
                                         .build();
         log.info("Vendor is Found ");
         
@@ -176,6 +181,26 @@ public class VendorServiceImpl implements VendorService {
         
         return "Vendor Deleted Successfully";
         
+    }
+
+    // To get Vendor By Id and add the skill to his profile 
+    @Override
+    public Vendor addSkillToVendor(long vendorId, String skill) {
+        // Get the Vendor by ID
+        if(vendorRepository.existsById(vendorId)){
+            log.info("Retreiving the Vendor by Id");
+        }
+        else{
+            log.info("Error: Vendor does not exist, check id");
+        }
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        if(vendor.getSkills().contains(skill)){
+            throw new BadRequestException("Skill already added to Vendor Profile");
+        }
+        // Else add the skill
+        vendor.getSkills().add(skill);
+
+        return vendorRepository.save(vendor);
     }
 
 

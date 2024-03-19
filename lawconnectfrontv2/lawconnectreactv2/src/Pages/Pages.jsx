@@ -16,6 +16,8 @@ import SkillForm from "../Vendor/SkillForm";
 
 function Pages() {
 
+  
+
   return (
     <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -28,7 +30,7 @@ function Pages() {
         <Route path="/vendorhome" element={<VendorMain/>} />
         <Route path="/userhome" element={<UserMain/>} />
         <Route path="/oktalogin" element={<OktaLogin/>}/>
-        <Route path="/vendorprofile" element={<VendorProfile/>} />
+        <Route path="/vendorprofile" element={<VendorProfile  />} />
         <Route path="/userprofile" element={<UserProfile/>} />
         <Route path= "/skillform" element={<SkillForm/>} />
     </Routes>

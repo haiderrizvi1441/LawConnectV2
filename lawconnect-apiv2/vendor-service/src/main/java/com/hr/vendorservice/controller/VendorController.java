@@ -86,6 +86,13 @@ public class VendorController {
 
         return new ResponseEntity<>("Vendor Deleted Successfully",HttpStatus.ACCEPTED);
     }
+
+    // To add Skills to vendor Profile
+    @PostMapping("/{vendorId}/addskill")
+    public ResponseEntity<Vendor> addSkillToVendor(@PathVariable long vendorId, @RequestBody String skill){
+        Vendor udpatedVendor = vendorService.addSkillToVendor(vendorId, skill);
+        return ResponseEntity.ok(udpatedVendor);
+    }
     
 
     
