@@ -49,3 +49,5 @@ spring:
 #             defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
 
 # This is redundant due to Config Server 
+
+# Feign Config 

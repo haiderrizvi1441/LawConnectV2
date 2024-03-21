@@ -17,7 +17,7 @@ spring:
     # CONFIG SERVER PROPERTIES
     config: 
         import: configserver:http://localhost:9296
-    
+        
 
 # #Eureka Server Config
 # eureka:
