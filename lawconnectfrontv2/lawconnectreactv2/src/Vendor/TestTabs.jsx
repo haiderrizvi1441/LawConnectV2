@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HiUserCircle, HiAdjustments } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
+import SkillsList from './SkillsList';
 
 function TestTabs() {
   const [activeTab, setActiveTab] = useState(0);
@@ -77,11 +78,10 @@ function TestTabs() {
             <span className="font-medium text-gray-800 dark:text-white">
               Skills tab's associated content
             </span>
-            .
-            Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
+            
+        
           </p>
+          <SkillsList/>
         </div>
         <div
           className={`${

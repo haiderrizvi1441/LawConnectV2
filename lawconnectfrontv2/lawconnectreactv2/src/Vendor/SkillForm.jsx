@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {useState} from 'react';
-
+import { useLogin, LoginContext } from '../context/LoginHelpContext';
 function SkillForm() {
 
     const navigate = useNavigate();
     const [selectedSkill, setSelectedSkill] = useState('');
     const [message, setMessage] = useState('');
+
+    // CONTEXT DATA 
+    const logininfo = useContext(LoginContext);
+    console.log("This is Context Data", logininfo.loginData);
+    const vendorId = logininfo.loginData;
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +22,7 @@ function SkillForm() {
         //     return;
         // }
         try{
-            const response = await fetch(`http://localhost:8080/vendor/5/addskill`, {
+            const response = await fetch(`http://localhost:8080/vendor/${vendorId}/addskill`, {
                 method: 'POST',
                 body: JSON.stringify(selectedSkill),
                 headers: {'Content-Type': 'application/json'},
@@ -24,7 +31,7 @@ function SkillForm() {
             if(response.ok){
                 const updatedVendor = await response.json();
                 setMessage("The Skill is added successfully");
-                selectedSkill(''); // Clear the Selected Skill
+                setSelectedSkill(''); // Clear the Selected Skill
             }
             // Else set the message as backend error 
             else{
@@ -51,7 +58,7 @@ function SkillForm() {
             <nav className='w-full h-20 bg-slate-800 text-white flex justify-between px-4 py-2 items-center'>
                 <div className='text-2xl hover:text-blue-500'>Adding your skills here ....</div>
 
-                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={(e) => navigate("/")}>Back to Profile</div>
+                <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={(e) => navigate("/vendorhome")}>Back to Profile</div>
             </nav>
             {/* Banner  */}
 

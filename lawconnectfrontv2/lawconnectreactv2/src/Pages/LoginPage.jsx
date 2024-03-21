@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { LoginContext,LoginContextProvider, useLogin } from '../context/LoginHelpContext';
 function LoginPage() {
 
   const navigate = useNavigate();
@@ -9,8 +9,10 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [myrole, setMyRole] = useState('');
 
+  // CONTEXT CONFIG - updating the Id context from the data 
+  const logins = useLogin();
 
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here
@@ -52,6 +54,10 @@ function LoginPage() {
           }
           else if (result.data.role === "VENDOR") {
             navigate("/vendorhome")
+
+            // CONTEXT GETTING UPDATED 
+            logins.setLoginData(result.data.id);
+            console.log("This is the id now update in Context:" , result.data.id);
           }
           else {
             navigate("/userhome")

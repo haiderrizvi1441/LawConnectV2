@@ -106,24 +106,25 @@ public class VendorServiceImpl implements VendorService {
             String encodedPassword = vendor1.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             Boolean roleMatch = (vendor1.getRole() == UserRole.VENDOR);
+            Long id = vendor1.getId();
 
             if(isPwdRight){
                 Optional<Vendor> vendor = vendorRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
                 if(vendor.isPresent() && roleMatch){
-                    return new LoginResponse("Login Success", true, UserRole.VENDOR);
+                    return new LoginResponse("Login Success", true, UserRole.VENDOR,id);
                 }
                 else{
-                    return new LoginResponse("Login Failed", false, UserRole.VENDOR);
+                    return new LoginResponse("Login Failed", false, UserRole.VENDOR,id);
                 }
             }
             else{
-                return new LoginResponse("Password does not match", false, UserRole.VENDOR);
+                return new LoginResponse("Password does not match", false, UserRole.VENDOR,id);
             }
 
         }
         else{
-            return new LoginResponse("Email does not exist", false, UserRole.VENDOR);
+            return new LoginResponse("Email does not exist", false, UserRole.VENDOR,null);
         }
         
     }
