@@ -10,7 +10,7 @@ function UserProfile(props) {
 
     <div>
         {/* Navbar  */}
-        <nav className='w-full h-20 bg-slate-800 text-white flex justify-between px-4 py-2 items-center'>
+        {/* <nav className='w-full h-20 bg-slate-800 text-white flex justify-between px-4 py-2 items-center'>
         <div className='flex items-center'>
           <div className='m-4'><IoIosBriefcase style={style} /></div>
           <div  className='text-2xl'> Profile Information</div>
@@ -22,10 +22,10 @@ function UserProfile(props) {
         </ul>
         
         <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={() => {navigate("/")}}>Log Out</button>
-      </nav>
+      </nav> */}
     
     {/* Profile Hero  */}
-    <div className="bg-gradient-to-br from-blue-400 to-purple-500">
+    <div className="bg-gray-300 m-4">
 
     
     <div className=" p-4 shadow-lg rounded-lg">

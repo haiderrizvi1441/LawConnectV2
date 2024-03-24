@@ -28,7 +28,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         log.info("Creating New Appointment");
         Appointment appointment = new Appointment();
         appointment.setCustomerId(createAppointmentRequest.getCustomerId());  
-        appointment.setDateTime(LocalDateTime.now());
+        appointment.setDateTime(createAppointmentRequest.getDateTime());
         appointment.setDescription(createAppointmentRequest.getDescription());
         appointment.setStatus("PENDING");
 

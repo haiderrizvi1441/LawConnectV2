@@ -14,12 +14,13 @@ export const useLogin = () => {
 // Creating ContextProvider
 export const LoginContextProvider = (props) => {
     const [loginData, setLoginData] = useState(0);
+    const [userLoginData, setUserLoginData] = useState(0);
     const[loading, setLoading] = useState(false);
     const[error, setError] = useState(null);
 
     
     return(
-        <LoginContext.Provider value={{loginData,setLoginData}}>
+        <LoginContext.Provider value={{loginData,setLoginData, userLoginData,setUserLoginData}}>
             {props.children}
         </LoginContext.Provider>
     )

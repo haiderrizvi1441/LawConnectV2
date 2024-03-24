@@ -13,7 +13,9 @@ import VendorProfile from "../Vendor/VendorProfile";
 import UserProfile from "../User/UserProfile";
 import SkillForm from "../Vendor/SkillForm";
 import SkillsList from "../Vendor/SkillsList";
-
+import VendorCards from "../Vendor/VendorCards";
+import ToVendorProfile from "../Vendor/ToVendorProfile";
+import CreateAppointment from "../User/CreateAppointment";
 
 function Pages() {
 
@@ -35,6 +37,9 @@ function Pages() {
         <Route path="/userprofile" element={<UserProfile/>} />
         <Route path= "/skillform" element={<SkillForm/>} />
         <Route path= "/skilllist" element ={<SkillsList/>} />
+        <Route path = "/vendorcard" element={<VendorCards/>}/>
+        <Route path= "/tovendorprofile/:id" element={<ToVendorProfile/>}/>
+        <Route path= "/createappointment" element= {<CreateAppointment/>}/>
     </Routes>
   )
 }

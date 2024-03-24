@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { HiUserCircle, HiAdjustments } from 'react-icons/hi';
+import { HiUserCircle } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
+import UserProfile from './UserProfile';
+import UserDashBoard from './UserDashBoard';
 
 function TabsUser() {
   const [activeTab, setActiveTab] = useState(0);
@@ -8,8 +10,18 @@ function TabsUser() {
   const tabs = [
     { icon: HiUserCircle, title: "Profile" },
     { icon: MdDashboard, title: "Dashboard" },
-    { icon: HiAdjustments, title: "All Vendors" },
   ];
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 0:
+        return <UserProfile />; // Render UserProfile when "Profile" is selected
+      case 1:
+        return <UserDashBoard />; // Render DashBoard when "Dashboard" is selected
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="mx-4">
@@ -31,27 +43,7 @@ function TabsUser() {
           ))}
         </nav>
       </div>
-      <div>
-        {tabs.map((tab, index) => (
-          <div
-            key={index}
-            className={`${
-              activeTab === index ? "block" : "hidden"
-            } px-4 py-2 bg-white dark:bg-gray-800`}
-          >
-            <p>
-              This is
-              <span className="font-medium text-gray-800 dark:text-white">
-                {tab.title} tab's associated content
-              </span>
-              .
-              Clicking another tab will toggle the visibility of this one for
-              the next. The tab JavaScript swaps classes to control the content
-              visibility and styling.
-            </p>
-          </div>
-        ))}
-      </div>
+      <div>{renderContent()}</div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ function SkillsList() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // CONTEXT DATA
+    // CONTEXT DATA - VENDOR
     const loginInfo = useContext(LoginContext);
     const vendorId = loginInfo.loginData;
     console.log("In Skill list , vendor id: ", vendorId);

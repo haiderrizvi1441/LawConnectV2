@@ -14,5 +14,6 @@ public class LoginResponse {
     String message;
     Boolean status;
     UserRole role;
+    long id;
 
 }

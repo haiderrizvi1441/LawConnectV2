@@ -37,9 +37,6 @@ function UserMain() {
       <TabsHome/>
       
       
-      
-
-
 
     </div>
   )

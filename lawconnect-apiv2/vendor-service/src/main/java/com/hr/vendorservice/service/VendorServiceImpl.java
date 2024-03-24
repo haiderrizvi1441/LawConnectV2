@@ -151,6 +151,7 @@ public class VendorServiceImpl implements VendorService {
                                         .lastname(vendor.getLastname())
                                         .email(vendor.getEmail())
                                         .password(vendor.getPassword())
+                                        .skills(vendor.getSkills())
                                         .build();
 
         return vendorResponse;
@@ -166,6 +167,7 @@ public class VendorServiceImpl implements VendorService {
         vendor.setLastname(vendorRequest.getLastname());
         vendor.setEmail(vendorRequest.getEmail());
         vendor.setPassword(vendorRequest.getPassword());
+
 
         // Saving the update Entity back to Repo
         vendorRepository.save(vendor);

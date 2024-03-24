@@ -107,18 +107,18 @@ public class CustomerServiceImpl implements CustomerService{
                 Optional<Customer> customer = customerRepository.findOneByEmailAndPassword(loginRequest.getEmail(), encodedPassword);
 
                 if(customer.isPresent() && roleMatch){
-                    return new LoginResponse("Login Success",true, UserRole.USER);
+                    return new LoginResponse("Login Success",true, UserRole.USER,customer.get().getId());
                 }
                 else{
-                    return new LoginResponse("Login Failed", false, UserRole.USER);
+                    return new LoginResponse("Login Failed", false, UserRole.USER , customer.get().getId());
                 }
             }
             else{
-                return new LoginResponse("Password does not match", false, UserRole.USER);
+                return new LoginResponse("Password does not match", false, UserRole.USER , 04747474);
             }
         }
         else{
-            return new LoginResponse("Email does not exist", false, UserRole.USER);
+            return new LoginResponse("Email does not exist", false, UserRole.USER,04747474);
         }
     }
 
