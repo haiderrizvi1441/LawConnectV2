@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { HiUserCircle } from 'react-icons/hi';
+import { HiUserCircle,HiAdjustments } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import UserProfile from './UserProfile';
 import UserDashBoard from './UserDashBoard';
+import CustomerAppointmentTracker from './CustomerAppointmentTracker';
 
 function TabsUser() {
   const [activeTab, setActiveTab] = useState(0);
@@ -10,6 +11,7 @@ function TabsUser() {
   const tabs = [
     { icon: HiUserCircle, title: "Profile" },
     { icon: MdDashboard, title: "Dashboard" },
+    { icon: HiAdjustments, title: "All Vendors" },
   ];
 
   const renderContent = () => {
@@ -17,7 +19,9 @@ function TabsUser() {
       case 0:
         return <UserProfile />; // Render UserProfile when "Profile" is selected
       case 1:
-        return <UserDashBoard />; // Render DashBoard when "Dashboard" is selected
+        return <CustomerAppointmentTracker/>; // Render DashBoard when "Dashboard" is selected
+      case 2: 
+        return <UserDashBoard/>  // Render When all Vendor is Selected
       default:
         return null;
     }

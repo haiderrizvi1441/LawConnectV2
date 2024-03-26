@@ -1,6 +1,6 @@
 package com.hr.customerservice.service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,15 +54,58 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment updateAppointment(long appointmentId, CreateAppointmentRequest updateAppointmentRequest) {
+    public Appointment updateAppointment(long appointmentId, CreateAppointmentRequest updatedAppointmentRequest) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateAppointment'");
     }
 
     @Override
     public String deleteAppointment(long appointmentId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAppointment'");
+        log.info("Deleting Appointment");
+        appointmentRepository.deleteById(appointmentId);
+        log.info("Appointment Deleted Successfully");
+        return "Appointment deleted successfully with id: " + appointmentId;
+
+    }
+
+    @Override
+    public Appointment changeAppointmentStatus(long appointmentId, String newStatus) {
+        Appointment tempAppointment = appointmentRepository.findById(appointmentId).get();
+        
+        if(tempAppointment == null){
+            throw new AppointmentCustomException("Appointment not found with Id: " + appointmentId);
+        }
+
+        tempAppointment.setStatus(newStatus);
+
+        // adding back to repo
+        appointmentRepository.save(tempAppointment);
+        return tempAppointment;
+
+        
+
+    }
+
+    @Override
+    public List<Appointment> getAllAppointmentsbyCustomerId(long customerId) {
+        log.info("Getting all appointments by the customerId: " ,customerId);
+        List<Appointment> customerAppointments = appointmentRepository.findByCustomerId(customerId).get();
+        if(customerAppointments==null){
+            throw new AppointmentCustomException("No Appointments found with the given customerId");
+        }
+        log.info("All customer Appointments Retrieved");
+        return customerAppointments;        
+    }
+
+    @Override
+    public List<Appointment> getAllAppointmentByVendorId(long vendorId) {
+        log.info("Getting all appointments by the vendorId: ", vendorId);
+        List<Appointment> vendorAppointments = appointmentRepository.findByVendorId(vendorId).get();
+        if(vendorAppointments == null){
+            throw new AppointmentCustomException("No Appointments found with the given vendorId");
+        }
+        log.info("All vendor appointments Retreived");
+        return vendorAppointments;
     }
     
 }

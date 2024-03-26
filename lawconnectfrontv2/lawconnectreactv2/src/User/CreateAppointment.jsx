@@ -16,7 +16,7 @@ function CreateAppointment() {
   
   // SETTING VALUE TO CUSTOMER CONTEXT  
   const customerloginInfo = useContext(LoginContext);
-  const customerId = loginInfo.userLoginData;
+  const customerId = customerloginInfo.userLoginData;
   console.log("CONTEXT customer id: ", customerId);
 
   // Desciption
@@ -129,7 +129,7 @@ function CreateAppointment() {
           </p>
         )}
       </div>
-
+      
 
     </div>
      </div>
