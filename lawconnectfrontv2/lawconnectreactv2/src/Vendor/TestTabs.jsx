@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { HiUserCircle, HiAdjustments } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import SkillsList from './SkillsList';
-
+import VendorProfile from './VendorProfile';
+import VendorAppointmentTracker from './VendorAppointmentTracker';
 function TestTabs() {
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
-    { icon: HiUserCircle, title: "Dashboard" },
-    { icon: MdDashboard, title: "Skills" },
-    { icon: HiAdjustments, title: "Balance" },
+    { icon: HiUserCircle, title: "Profile" },
+    { icon: MdDashboard, title: "Dashboard" },
+    { icon: HiAdjustments, title: "Skills" },
+    
   ];
 
   return (
@@ -25,7 +27,7 @@ function TestTabs() {
             } whitespace-nowrap py-6 px-4 border-b-2 font-medium text-lg`}
           >
             <HiUserCircle className="w-8 h-8 mr-2 inline" />
-            Dashboard
+            Profile
           </button>
           <button
             onClick={() => setActiveTab(1)}
@@ -36,7 +38,7 @@ function TestTabs() {
             } whitespace-nowrap py-6 px-4 border-b-2 font-medium text-lg`}
           >
             <MdDashboard className="w-8 h-8 mr-2 inline" />
-            Skills
+            Dashboard
           </button>
           <button
             onClick={() => setActiveTab(2)}
@@ -47,7 +49,7 @@ function TestTabs() {
             } whitespace-nowrap py-6 px-4 border-b-2 font-medium text-lg`}
           >
             <HiAdjustments className="w-8 h-8 mr-2 inline" />
-            Balance
+            Skills
           </button>
         </nav>
       </div>
@@ -57,7 +59,7 @@ function TestTabs() {
             activeTab === 0 ? "block" : "hidden"
           } px-4 py-2 bg-white dark:bg-gray-800`}
         >
-          <p>
+          {/* <p>
             This is
             <span className="font-medium text-gray-800 dark:text-white">
               Dashboard tab's associated content
@@ -66,29 +68,30 @@ function TestTabs() {
             Clicking another tab will toggle the visibility of this one for
             the next. The tab JavaScript swaps classes to control the content
             visibility and styling.
-          </p>
+          </p> */}
+          <VendorProfile/>
         </div>
         <div
           className={`${
             activeTab === 1 ? "block" : "hidden"
           } px-4 py-2 bg-white dark:bg-gray-800`}
         >
-          <p>
+          {/* <p>
             This is
             <span className="font-medium text-gray-800 dark:text-white">
               Skills tab's associated content
             </span>
             
         
-          </p>
-          <SkillsList/>
+          </p> */}
+        <VendorAppointmentTracker />
         </div>
         <div
           className={`${
             activeTab === 2 ? "block" : "hidden"
           } px-4 py-2 bg-white dark:bg-gray-800`}
         >
-          <p>
+          {/* <p>
             This is
             <span className="font-medium text-gray-800 dark:text-white">
               Balance tab's associated content
@@ -97,7 +100,8 @@ function TestTabs() {
             Clicking another tab will toggle the visibility of this one for
             the next. The tab JavaScript swaps classes to control the content
             visibility and styling.
-          </p>
+          </p> */}
+          <SkillsList/>
         </div>
       </div>
     </div>

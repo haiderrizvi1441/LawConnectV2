@@ -1,8 +1,11 @@
 import React ,{useContext,useEffect,useState} from 'react'
 import { LoginContext } from '../context/LoginHelpContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SkillsList() {
+
+  const navigate = useNavigate();
     const [vendorData, setVendorData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -56,17 +59,35 @@ function SkillsList() {
       }
 
   return (
-<div className="flex flex-col space-y-2">
-      
-      <div className="text-blue-700 text-xl font-bold mb-2">Skills:</div>
-      <ul className="list-disc pl-4">
-        {vendorData.skills.map((skill) => (
-          <li key={skill} className="text-gray-700">
-            {skill.replace(/"/g, '')}
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col items-center p-6 pb-8"> 
+    <div className="w-full max-w-md bg-slate-200 rounded-lg shadow-md p-4">  
+      <table className="w-full rounded-lg shadow-md overflow-hidden">
+        <thead>
+          <tr className="bg-gray-100 text-center font-medium">
+            <th className="p-2">Skills</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vendorData.skills &&
+            vendorData.skills.map((skill) => (
+              <tr key={skill} className="border-b hover:bg-red-500 hover:text-white hover:scale-110">
+                <td className="p-2">{skill.replace(/"/g, '')}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+
+      <div className="back-button-container p-6">
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          onClick={(e) => navigate("/skillform")}
+        >
+          Add Skill
+        </button>
+      </div>
     </div>
+  </div>
   )
 }
 

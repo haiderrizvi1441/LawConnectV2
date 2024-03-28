@@ -14,7 +14,7 @@ function CreateAppointment() {
   const vendorId = loginInfo.loginData;
   console.log("Appointment Req: [VENDOR ID]: ", vendorId);
   
-  // SETTING VALUE TO CUSTOMER CONTEXT  
+  // Using Context (set at login) to get the CustomerId  
   const customerloginInfo = useContext(LoginContext);
   const customerId = customerloginInfo.userLoginData;
   console.log("CONTEXT customer id: ", customerId);

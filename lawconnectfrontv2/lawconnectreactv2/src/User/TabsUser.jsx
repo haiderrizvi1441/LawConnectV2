@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { HiUserCircle,HiAdjustments } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import UserProfile from './UserProfile';
 import UserDashBoard from './UserDashBoard';
 import CustomerAppointmentTracker from './CustomerAppointmentTracker';
 
+import axios from 'axios';
+
+
 function TabsUser() {
   const [activeTab, setActiveTab] = useState(0);
+
 
   const tabs = [
     { icon: HiUserCircle, title: "Profile" },
     { icon: MdDashboard, title: "Dashboard" },
     { icon: HiAdjustments, title: "All Vendors" },
   ];
+
+
 
   const renderContent = () => {
     switch (activeTab) {

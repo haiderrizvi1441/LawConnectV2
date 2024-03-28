@@ -2,6 +2,7 @@ import React from 'react'
 import village from '../Resources/Images/lc-village.jpg'
 import village2 from '../Resources/Images/lc-village2.jpg'
 import village1 from '../Resources/Images/ref.png'
+import lawconnectback from '../Resources/Images/lawconnectbackground.jpg'
 import briefcase from '../Resources/Icons/briefcaseIcon.svg'
 import pen from '../Resources/Icons/penIcon.svg'
 import services from '../Resources/Icons/servicesIcon.svg'
@@ -12,10 +13,10 @@ import advice from '../Resources/Icons/legalAdviceIcon.svg'
 function Hero() {
     return (
         <div>
-            <div className='Hero w-full'>
+            <div className='Hero w-full '>
                 {/* Image Section  */}
                 <div className='relative w-full'>
-                    <img src={village} alt="village" className='w-full h-2/3 bg-contain ' />
+                    <img src={lawconnectback} alt="village" className='w-full h-1/2 object-cover' />
 
                     <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 text-white'>
                         <h1 className='text-4xl font-semibold italic'>Providing Legal Services Across India </h1>
