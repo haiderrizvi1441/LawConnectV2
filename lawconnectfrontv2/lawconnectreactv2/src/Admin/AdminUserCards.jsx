@@ -15,7 +15,7 @@ function AdminUserCards() {
     // Delete Button Functionality
     const deleteResponse = async(id) =>{
         try {
-            await axios.delete(`http://localhost:8081/user/${id}`)
+            await axios.delete(`http://localhost:8081/customer/id/${id}`)
             console.log("User Deleted with id: ",id)
             setUsers(users.filter(user => user.id !== id));
 
@@ -65,8 +65,8 @@ function AdminUserCards() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8082/admin/getallbyrole/USER");
-                setUsers(response.data); // List of Vendors
+                const response = await axios.get("http://localhost:8081/customer/allCustomers");
+                setUsers(response.data);
                 console.log("Response Data below")
                 console.log(response.data)
             }

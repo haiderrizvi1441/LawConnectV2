@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginResponse {
     
-    String message;
-    Boolean status;
-    UserRole role;
+    private String message;
+    private Boolean status;
+    private long id;
+    private UserRole role;
 
 }

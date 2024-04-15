@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminVendorCards from './AdminVendorCards';
 import AdminUserCards from './AdminUserCards';
 import { useState } from 'react';
+import TabsAdmin from './TabsAdmin';
 
 
 function AdminMain() {
@@ -32,11 +33,11 @@ function AdminMain() {
           <li className='px-4 hover:text-lime-500'>Contact Us</li>
         </ul>
         <div className='flex space-x-3 font-semibold'>
-          <button className='px-4 py-4 bg-gray-500 rounded-lg hover:font-bold cursor-pointer hover:bg-lime-600'
+          {/* <button className='px-4 py-4 bg-gray-500 rounded-lg hover:font-bold cursor-pointer hover:bg-lime-600'
           onClick={() => handleStatusChange("vendors")}>All Vendors</button>
 
           <button className='px-4 py-4 bg-gray-500 rounded-lg hover:font-bold cursor-pointer hover:bg-lime-600'
-          onClick={() => handleStatusChange("users")}>All Users</button>
+          onClick={() => handleStatusChange("users")}>All Users</button> */}
 
           <button className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600'
           onClick = {() => {navigate("/")}} 
@@ -48,7 +49,7 @@ function AdminMain() {
 
       <div >
 
-      {status === "users" ? <AdminUserCards/> : <AdminVendorCards/>}
+      <TabsAdmin/>
 
       </div>
 

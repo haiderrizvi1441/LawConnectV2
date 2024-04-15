@@ -10,8 +10,8 @@ function Navbar() {
                 <div className='text-xl ml-3'>Law <span className='text-2xl hover:text-blue-500'>Connect.</span> </div>
                 <ul className='flex font-semibold'>
                   
-                    <li className='px-4 hover:text-lime-500'>About Us</li>
-                    <li className='px-4 hover:text-lime-500'>Contact Us</li>
+                    <li className='px-4 hover:text-lime-500' onClick={()=>{navigate("/aboutus")}}>About Us</li>
+                    <li className='px-4 hover:text-lime-500'onClick={()=>{navigate("/contactus")}}>Contact Us</li>
                 </ul>
                 <div className='px-4 py-4 bg-slate-900 rounded-lg hover:font-bold cursor-pointer hover:bg-yellow-600 mr-3' onClick={(e)=>navigate("/login")}>Login</div>
             </nav>

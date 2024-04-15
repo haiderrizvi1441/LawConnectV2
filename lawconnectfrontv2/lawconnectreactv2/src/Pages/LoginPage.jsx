@@ -51,6 +51,9 @@ function LoginPage() {
         }
         else if (result.data.message === "Login Success") {
           if (result.data.role === "ADMIN") {
+            // ADMIN CONTEXT GETTING UPDATED
+            logins.setAdminLoginData(result.data.id);
+            console.log("This is the admin id now upadated in Context: ", result.data.id)
             navigate("/adminhome")
           }
           else if (result.data.role === "VENDOR") {
@@ -58,13 +61,13 @@ function LoginPage() {
 
             // VENDOR CONTEXT GETTING UPDATED 
             logins.setLoginData(result.data.id);
-            console.log("This is the vendor id now update in Context:" , result.data.id);
+            console.log("This is the vendor id now updated in Context:" , result.data.id);
           }
           else if(result.data.role === "USER"){
             navigate("/userhome")
             // USER CONTEXT GETTING UPDATED
             logins.setUserLoginData(result.data.id);
-            console.log("This is the customer id now update in Context:" , result.data.id);
+            console.log("This is the customer id now updated in Context:" , result.data.id);
 
           }
           else {

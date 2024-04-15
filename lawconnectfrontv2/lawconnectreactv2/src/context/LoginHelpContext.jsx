@@ -15,12 +15,13 @@ export const useLogin = () => {
 export const LoginContextProvider = (props) => {
     const [loginData, setLoginData] = useState(0);
     const [userLoginData, setUserLoginData] = useState(0);
+    const[adminLoginData,setAdminLoginData] = useState(0);
     const[loading, setLoading] = useState(false);
     const[error, setError] = useState(null);
 
     
     return(
-        <LoginContext.Provider value={{loginData,setLoginData, userLoginData,setUserLoginData}}>
+        <LoginContext.Provider value={{loginData,setLoginData, userLoginData,setUserLoginData,adminLoginData,setAdminLoginData}}>
             {props.children}
         </LoginContext.Provider>
     )

@@ -17,6 +17,7 @@ spring:
     # CONFIG SERVER PROPERTIES
     config: 
         import: configserver:http://localhost:9296
+        # label: main
         
 
 # #Eureka Server Config

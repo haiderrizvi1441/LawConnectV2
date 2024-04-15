@@ -25,7 +25,7 @@ function UserMain() {
           <div  className='text-2xl hover:text-blue-500'> User Hub</div>
         </div>
         <ul className='flex font-semibold'>
-          <li className='px-4 hover:text-lime-500'>About Us</li>
+          <li className='px-4 hover:text-lime-500' onClick={()=>{navigate("/aboutus")}}>About Us</li>
           <li className='px-4 hover:text-lime-500'>Contact Us</li>
         </ul>
       

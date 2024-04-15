@@ -63,8 +63,8 @@ function VendorAppointmentTracker() {
             selectedStatus
             );
             if(response.status === 200){
-   
-                console.log("Appointment Updated")
+                setAppointments(appointments.map((appt) => appt.appointmentId === appointmentId ? { ...appt, status: selectedStatus } : appt))
+                console.log("Appointment Updated",)
             }
             else{
                 setError("An Error occured while updating status");
@@ -98,7 +98,8 @@ function VendorAppointmentTracker() {
             <div className='status-dropdown'>
             <select
           value={selectedStatus}
-          onChange={(event) => setSelectedStatus(event.target.value)}
+          onChange={(event) => {setSelectedStatus(event.target.value)
+                                console.log("This is status::::::::",selectedStatus)}}
           className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
           <option value="PENDING">PENDING</option>
