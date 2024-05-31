@@ -15,7 +15,7 @@ const AdminToVendorProfile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/vendor/id/${id}`);
+                const response = await axios.get(`http://localhost:9090/vendor/id/${id}`);
                 setVendorData(response.data);
             } catch (error) {
                 console.error(error);

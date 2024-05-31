@@ -20,7 +20,7 @@ function VendorAppointmentTracker() {
             setError(null);
 
             try{
-                const response = await axios.get(`http://localhost:8081/appointments/getallbyvendorid/${vendorId}`);
+                const response = await axios.get(`http://localhost:9090/appointments/getallbyvendorid/${vendorId}`);
             
                 setAppointments(response.data);
                 console.log("Appointment Data: ", appointments);
@@ -59,7 +59,7 @@ function VendorAppointmentTracker() {
     const updateAppointment = async (appointmentId) => {
         setIsLoading(true);
         try{
-            const response = await axios.post(`http://localhost:8081/appointments/${appointmentId}`,
+            const response = await axios.post(`http://localhost:9090/appointments/${appointmentId}`,
             selectedStatus
             );
             if(response.status === 200){

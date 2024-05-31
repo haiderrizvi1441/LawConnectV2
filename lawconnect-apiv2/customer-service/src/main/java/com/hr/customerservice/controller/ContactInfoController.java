@@ -18,6 +18,7 @@ import com.hr.customerservice.model.ContactInfoRequest;
 import com.hr.customerservice.service.ContactInfoService;
 
 @RestController
+
 @RequestMapping("/contactinfo")
 public class ContactInfoController {
     

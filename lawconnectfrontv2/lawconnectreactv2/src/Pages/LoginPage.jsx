@@ -22,19 +22,19 @@ function LoginPage() {
     let apiurl = "";
     switch(myrole){
       case 'ADMIN':
-        apiurl = "http://localhost:8082/admin/login";
+        apiurl = "http://localhost:9090/admin/login";
         break;
       
       case 'VENDOR':
-        apiurl = "http://localhost:8080/vendor/login";
+        apiurl = "http://localhost:9090/vendor/login";
         break;
       
       case 'USER':
-        apiurl = "http://localhost:8081/customer/login";
+        apiurl = "http://localhost:9090/customer/login";
         break;
       
       default:
-        apiurl = "http://localhost:8081/customer/login";
+        apiurl = "http://localhost:9090/customer/login";
         break;
 
 

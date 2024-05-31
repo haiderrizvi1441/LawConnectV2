@@ -61,7 +61,7 @@ function CreateAppointment() {
 
     // Creating appointment through Backend API
     try{
-      const response = await axios.post(`http://localhost:8081/appointments/createAppointment` ,{
+      const response = await axios.post(`http://localhost:9090/appointments/createAppointment` ,{
         "customerId": customerId,
         "vendorId": vendorId,
        "description": desc,

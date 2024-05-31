@@ -21,7 +21,7 @@ function SkillsList() {
             setError(null);
 
             try {
-                const response  = await axios.get(`http://localhost:8080/vendor/id/${vendorId}`);
+                const response  = await axios.get(`http://localhost:9090/vendor/id/${vendorId}`);
                 // if(!response.ok){
                 //     throw new Error(`Error fetching vendor Datass ${response.statusText}`)
                 // }

@@ -12,24 +12,26 @@ function ContactUs() {
         e.preventDefault();
 
         try{
-            const response = await axios.post(`http://localhost:8081/contactinfo/`,{
+            const response = await axios.post(`http://localhost:9090/contactinfo/`,{
                 "email":email,
                 "message":message
 
             })
-
             console.log("Response data ", response.data);
         }
         
         catch(error){
-            console(error);
+            console.log(error);
         }
         finally{
-
+            
         }
+
         setSentMessage("Message Received, We will get back to you shortly");
         setEmail('');
         setMessage('');
+
+        
     };
 
     return (

@@ -88,7 +88,7 @@ function VendorCards() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/vendor/allVendors");
+                const response = await axios.get("http://localhost:9090/vendor/allVendors");
                 setVendors(response.data); // List of Vendors
                 console.log("Response Data below")
                 console.log(response.data)

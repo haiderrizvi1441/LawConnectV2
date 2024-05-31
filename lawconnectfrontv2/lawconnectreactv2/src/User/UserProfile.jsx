@@ -20,7 +20,7 @@ function UserProfile() {
   useEffect(() => {
     const getUserDetails = async (e) => {
       try {
-        const response = await axios.get(`http://localhost:8081/customer/id/${customerId}`);
+        const response = await axios.get(`http://localhost:9090/customer/id/${customerId}`);
         console.log('Response Data: ', response.data);
         const { id, firstname, lastname, email, role } = response.data;
         console.log(id, firstname, lastname);

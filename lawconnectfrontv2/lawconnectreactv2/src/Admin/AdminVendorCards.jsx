@@ -44,7 +44,7 @@ function AdminVendorCards() {
     // Function to Delete Card
     const DeleteResponse = async(id) => {
         try{
-            await axios.delete(`http://localhost:8080/vendor/${id}`);
+            await axios.delete(`http://localhost:9090/vendor/${id}`);
             console.log("Vendor Deleted with Id: ",id);
             setVendors(vendors.filter(vendor => vendor.id !== id));
             
@@ -62,7 +62,7 @@ function AdminVendorCards() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/vendor/allVendors");
+                const response = await axios.get("http://localhost:9090/vendor/allVendors");
                 setVendors(response.data); // List of Vendors
                 console.log("Response Data below")
                 console.log(response.data)

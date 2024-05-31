@@ -21,7 +21,7 @@ function CustomerAppointmentTracker() {
             setError(null);
 
             try {
-                const response = await axios.get(`http://localhost:8081/appointments/getallbycustomerid/${customerId}`);
+                const response = await axios.get(`http://localhost:9090/appointments/getallbycustomerid/${customerId}`);
 
                 const appointmentdata = response.data;
                 setAppointments(appointmentdata);
@@ -44,7 +44,7 @@ function CustomerAppointmentTracker() {
     const deleteAppointment = async (appointmentId) => {
         setIsLoading(true);
         try {
-          await axios.delete(`http://localhost:8081/appointments/${appointmentId}`);
+          await axios.delete(`http://localhost:9090/appointments/${appointmentId}`);
           const updatedAppointments = appointments.filter(
             (appointment) => appointment.appointmentId !== appointmentId
           );

@@ -18,6 +18,7 @@ import com.hr.customerservice.model.CreateAppointmentRequest;
 import com.hr.customerservice.service.AppointmentService;
 
 @RestController
+
 @RequestMapping("/appointments")
 public class AppointmentController {
     

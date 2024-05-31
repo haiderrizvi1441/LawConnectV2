@@ -16,19 +16,19 @@ const RegisterPage = () => {
     let apiUrl = '';
     switch(registrationType){
       case 'admin':
-        apiUrl = 'http://localhost:8082/admin/addAdmin';
+        apiUrl = 'http://localhost:9090/admin/addAdmin';
         break;
       
       case 'vendor':
-        apiUrl = 'http://localhost:8080/vendor/addVendor';
+        apiUrl = 'http://localhost:9090/vendor/addVendor';
         break;
 
       case 'user':
-        apiUrl = 'http://localhost:8081/customer/addCustomer';
+        apiUrl = 'http://localhost:9090/customer/addCustomer';
         break;
 
       default:
-        apiUrl = 'http://localhost:8081/customer/addCustomer';
+        apiUrl = 'http://localhost:9090/customer/addCustomer';
         break;
     }
     try{

@@ -13,7 +13,7 @@ function AdminContactTracker() {
     const fetchData = async () =>{
 
       try{
-        const response = await axios.get(`http://localhost:8081/contactinfo/getallcontactinfo`);
+        const response = await axios.get(`http://localhost:9090/contactinfo/getallcontactinfo`);
         setContactInfos(response.data); // List of Contact Info
         console.log("This is the contact data: ", response.data )
       }
@@ -34,7 +34,7 @@ function AdminContactTracker() {
     setIsLoading(true);
 
     try{
-      await axios.delete(`http://localhost:8081/contactinfo/${id}`);
+      await axios.delete(`http://localhost:9090/contactinfo/${id}`);
       console.log("Deeleted Succuessffllly")
       const updatedContactInfos = contactInfos.filter(
         (contactInfo) => contactInfo.id !== id

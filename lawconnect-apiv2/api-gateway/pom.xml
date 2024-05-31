@@ -25,8 +25,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
@@ -77,18 +82,24 @@
 			<scope>test</scope>
 		</dependency>
 		<!--  OKTA Dependency  -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>com.okta.spring</groupId>
 			<artifactId>okta-spring-boot-starter</artifactId>
 			<version>3.0.5</version>
-		</dependency>
+		</dependency> -->
 
 
-	</dependencies>
+	
+   <dependency>
+     <groupId>org.springframework.security</groupId>
+     <artifactId>spring-security-config</artifactId>
+     <version>5.1.6.RELEASE</version>
+   </dependency>
+ </dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

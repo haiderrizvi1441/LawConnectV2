@@ -2,11 +2,13 @@ server:
   port: 9090
 
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: API-GATEWAY
   # Config Server
   config:
-  # Modified for Docker Compatibility
+    # Modified for Docker Compatibility
     import: configserver:http://${CONFIG_SERVER_URL:localhost}:9296
 
   # Cloud Config (Gateway specific)
@@ -14,68 +16,99 @@ spring:
     gateway:
       routes:
         - id: VENDOR-SERVICE
-          uri: http://localhost:8080 
+          uri: http://localhost:8080
           predicates:
             - Path=/vendor/**
           filters: # Config for Circuit Breaker
-            - name: CircuitBreaker 
+            - name: CircuitBreaker
               args:
                 name: VENDOR-SERVICE
                 fallbackuri: forward:/vendorServiceFallBack
                 # Rate Limiter Config
-            - name: RequestRateLimiter 
-              args: 
+            - name: RequestRateLimiter
+              args:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
 
         - id: USER-SERVICE
           uri: http://localhost:8081
           predicates:
-            - Path=/user/**
+            - Path=/customer/**
           filters: # Config for Circuit Breaker
-            - name: CircuitBreaker 
+            - name: CircuitBreaker
               args:
                 name: USER-SERVICE
                 fallbackuri: forward:/userServiceFallBack
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1 
-                redis-rate-limiter.burstCapacity: 1 
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
 
+        - id: USER-SERVICE
+          uri: http://localhost:8081
+          predicates:
+            - Path=/appointments/**
+          filters: # Config for Circuit Breaker
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+        
+        - id: USER-SERVICE
+          uri: http://localhost:8081
+          predicates:
+            - Path=/contactinfo/**
+          filters: # Config for Circuit Breaker
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+
+        
         - id: ADMIN-SERVICE
           uri: http://localhost:8082
           predicates:
             - Path=/admin/**
           filters: # Config for Circuit Breaker
-            - name: CircuitBreaker 
+            - name: CircuitBreaker
               args:
                 name: ADMIN-SERVICE
                 fallbackuri: forward:/adminServiceFallBack
             - name: RequestRateLimiter
-              args: 
+              args:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
-
-
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins: "*" # Replace with your frontend origin
+            allowedMethods: "*" # Allow all methods (adjust based on your needs)
+            allowedHeaders: "*" # Allow all headers (adjust based on your needs)
 
 # Zipkin Config
 management:
-    endpoints:
-        web:
-            exposure:
-                include: "*"
-    tracing: 
-        sampling: 
-            probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
+# Okta Config
+# okta:
+#   oauth2:
+#     issuer: https://dev-90693819.okta.com/oauth2/default
+#     audience: api://default
+#     client-id:
+#     client-secret:
 
-
-# Okta Config 
-okta:
-  oauth2:
-    issuer: https://dev-90693819.okta.com/oauth2/default
-    audience: api://default
-    client-id: 0oab4phbjzZKmz9rl5d7
-    client-secret: CYVlL38YWngew14V94x5XBOmMKtm61CBhby9P-qPGukFGmGFiWZKOEttXNTULfP8
-
-    scopes: openid, profile, email, offline_access
+#     scopes: openid, profile, email, offline_access
 

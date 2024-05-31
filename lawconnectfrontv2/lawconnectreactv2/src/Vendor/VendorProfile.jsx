@@ -23,7 +23,7 @@ function VendorProfile(){
     useEffect(() => {
       const getVendorDetails = async (e) => {
         try{
-          const response = await axios.get(`http://localhost:8080/vendor/id/${vendorId}`);
+          const response = await axios.get(`http://localhost:9090/vendor/id/${vendorId}`);
           console.log('Response Data: ', response.data);
           const {id, firstname, lastname, email, role} = response.data;
           setVendorData({id, firstname, lastname, email, role});

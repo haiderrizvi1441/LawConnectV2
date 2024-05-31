@@ -20,7 +20,7 @@ function AdminProfile() {
     useEffect(() => {
       const getUserDetails = async (e) => {
         try {
-          const response = await axios.get(`http://localhost:8082/admin/id/${adminId}`);
+          const response = await axios.get(`http://localhost:9090/admin/id/${adminId}`);
           console.log('Response Data: ', response.data);
           const { id, firstname, lastname, email, role } = response.data;
           console.log(id, firstname, lastname);

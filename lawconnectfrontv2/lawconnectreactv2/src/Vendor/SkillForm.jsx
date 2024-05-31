@@ -22,7 +22,7 @@ function SkillForm() {
         //     return;
         // }
         try{
-            const response = await fetch(`http://localhost:8080/vendor/${vendorId}/addskill`, {
+            const response = await fetch(`http://localhost:9090/vendor/${vendorId}/addskill`, {
                 method: 'POST',
                 body: JSON.stringify(selectedSkill),
                 headers: {'Content-Type': 'application/json'},
